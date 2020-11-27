@@ -1,56 +1,960 @@
-(self.AMP=self.AMP||[]).push({n:"amp-carousel",v:"2011070101001",f:(function(AMP,_){
-'use strict';var g,aa="function"==typeof Object.create?Object.create:function(a){function b(){}b.prototype=a;return new b};function ba(a){for(var b=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global],c=0;c<b.length;++c){var d=b[c];if(d&&d.Math==Math)return}(function(){throw Error("Cannot find global object");})()}ba(this);"function"===typeof Symbol&&Symbol("x");var l;
-if("function"==typeof Object.setPrototypeOf)l=Object.setPrototypeOf;else{var m;a:{var ca={a:!0},da={};try{da.__proto__=ca;m=da.a;break a}catch(a){}m=!1}l=m?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}var ea=l;
-function n(a,b){a.prototype=aa(b.prototype);a.prototype.constructor=a;if(ea)ea(a,b);else for(var c in b)if("prototype"!=c)if(Object.defineProperties){var d=Object.getOwnPropertyDescriptor(b,c);d&&Object.defineProperty(a,c,d)}else a[c]=b[c];a.ua=b.prototype}var p;function q(){return p?p:p=Promise.resolve(void 0)};function fa(a,b){var c=b=void 0===b?"":b;try{return decodeURIComponent(a)}catch(d){return c}};var ha=/(?:^[#?]?|&)([^=&]+)(?:=([^&]*))?/g;function ia(a){return"number"===typeof a&&isFinite(a)};var r=self.AMP_CONFIG||{},ja=("string"==typeof r.cdnProxyRegex?new RegExp(r.cdnProxyRegex):r.cdnProxyRegex)||/^https:\/\/([a-zA-Z0-9_-]+\.)?cdn\.ampproject\.org$/;function ka(a){if(self.document&&self.document.head&&(!self.location||!ja.test(self.location.origin))){var b=self.document.head.querySelector('meta[name="'+a+'"]');b&&b.getAttribute("content")}}r.cdnUrl||ka("runtime-host");r.geoApiUrl||ka("amp-geo-api");self.__AMP_LOG=self.__AMP_LOG||{user:null,dev:null,userForEmbed:null};var t=self.__AMP_LOG;function u(){if(!t.user)throw Error("failed to call initLogConstructor");return t.user}function v(){if(t.dev)return t.dev;throw Error("failed to call initLogConstructor");}function la(a){u().assert(a,void 0,void 0,void 0,void 0,void 0,void 0,void 0,void 0,void 0,void 0)};function ma(){var a,b;this.promise=new Promise(function(c,d){a=c;b=d});this.resolve=a;this.reject=b};function w(a,b){a=a.__AMP_TOP||(a.__AMP_TOP=a);return x(a,b)}function y(a){var b=z(a);b=A(b);return x(b,"owners")}function na(a){a=z(a);a=A(a);return oa(a,"action")?x(a,"action"):null}function z(a){return a.nodeType?w((a.ownerDocument||a).defaultView,"ampdoc").getAmpDoc(a):a}function A(a){a=z(a);return a.isSingleDoc()?a.win:a}function x(a,b){oa(a,b);a=B(a)[b];a.obj||(a.obj=new a.ctor(a.context),a.ctor=null,a.context=null,a.resolve&&a.resolve(a.obj));return a.obj}
-function pa(a){var b=B(a)["amp-analytics-instrumentation"];if(b){if(b.promise)return b.promise;x(a,"amp-analytics-instrumentation");return b.promise=Promise.resolve(b.obj)}return null}function B(a){var b=a.__AMP_SERVICES;b||(b=a.__AMP_SERVICES={});return b}function oa(a,b){a=a.__AMP_SERVICES&&a.__AMP_SERVICES[b];return!(!a||!a.ctor&&!a.obj)}function qa(){var a=new ma,b=a.promise,c=a.resolve;a=a.reject;b.catch(function(){});return{obj:null,promise:b,resolve:c,reject:a,context:null,ctor:null}};/*
- https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
-function C(a){return a||{}};function ra(a,b){for(;a&&void 0!==a;a=a.parentElement)if(b(a))return a;return null}function sa(a){return a.closest?a.closest("[i-amphtml-scale-animation]"):ra(a,function(a){var b=a.matches||a.webkitMatchesSelector||a.mozMatchesSelector||a.msMatchesSelector||a.oMatchesSelector;return b?b.call(a,"[i-amphtml-scale-animation]"):!1})}
-function ta(a,b){var c=a.hasAttribute("i-amphtml-carousel-hide-buttons"),d=void 0!==b?b:!c;d!==c&&(d?a.setAttribute("i-amphtml-carousel-hide-buttons",""):a.removeAttribute("i-amphtml-carousel-hide-buttons"))};function ua(a){var b=pa(A(a));if(b)return b;var c=z(a);return c.waitForBodyOpen().then(function(){var a=c.win;var b=c.win.document.head;if(b){var f={};b=b.querySelectorAll("script[custom-element],script[custom-template]");for(var h=0;h<b.length;h++){var k=b[h];k=k.getAttribute("custom-element")||k.getAttribute("custom-template");f[k]=!0}f=Object.keys(f)}else f=[];return f.includes("amp-analytics")?w(a,"extensions").waitForExtension(a,"amp-analytics"):q()}).then(function(){var b=c.win;if(b.__AMP_EXTENDED_ELEMENTS&&
-b.__AMP_EXTENDED_ELEMENTS["amp-analytics"]){b=A(a);var e=pa(b);e?b=e:(b=B(b),b["amp-analytics-instrumentation"]=qa(),b=b["amp-analytics-instrumentation"].promise)}else b=null;return b})};function D(a){return w(a,"timer")};function E(a,b,c,d){var e=new va(a,b,c,d);return e.solveYValueFromXValue.bind(e)}function va(a,b,c,d){this.y0=this.x0=0;this.x1=a;this.y1=b;this.x2=c;this.y2=d;this.y3=this.x3=1}g=va.prototype;g.solveYValueFromXValue=function(a){return this.getPointY(this.solvePositionFromXValue(a))};
-g.solvePositionFromXValue=function(a){var b=(a-this.x0)/(this.x3-this.x0);if(0>=b)return 0;if(1<=b)return 1;for(var c=0,d=1,e=0,f=0;8>f;f++){e=this.getPointX(b);var h=(this.getPointX(b+1E-6)-e)/1E-6;if(1E-6>Math.abs(e-a))return b;if(1E-6>Math.abs(h))break;else e<a?c=b:d=b,b-=(e-a)/h}for(f=0;1E-6<Math.abs(e-a)&&8>f;f++)e<a?(c=b,b=(b+d)/2):(d=b,b=(b+c)/2),e=this.getPointX(b);return b};
-g.getPointX=function(a){if(0==a)return this.x0;if(1==a)return this.x3;var b=this.lerp(this.x0,this.x1,a),c=this.lerp(this.x1,this.x2,a),d=this.lerp(this.x2,this.x3,a);b=this.lerp(b,c,a);c=this.lerp(c,d,a);return this.lerp(b,c,a)};g.getPointY=function(a){if(0==a)return this.y0;if(1==a)return this.y3;var b=this.lerp(this.y0,this.y1,a),c=this.lerp(this.y1,this.y2,a),d=this.lerp(this.y2,this.y3,a);b=this.lerp(b,c,a);c=this.lerp(c,d,a);return this.lerp(b,c,a)};g.lerp=function(a,b,c){return a+c*(b-a)};
-var wa=E(.25,.1,.25,1),xa=E(.42,0,1,1),ya=E(0,0,.58,1),za=E(.42,0,.58,1),Aa={linear:function(a){return a},ease:wa,"ease-in":xa,"ease-out":ya,"ease-in-out":za};function Ba(a){if(!a)return null;if("string"==typeof a){if(-1!=a.indexOf("cubic-bezier")){var b=a.match(/cubic-bezier\((.+)\)/);if(b&&(b=b[1].split(",").map(parseFloat),4==b.length)){for(var c=0;4>c;c++)if(isNaN(b[c]))return null;return E(b[0],b[1],b[2],b[3])}return null}return Aa[a]}return a};function Ca(){}function F(a){this.L=a;this.C=w(self,"vsync");this.ha=null;this.w=[]}function G(a,b,c,d){return(new F(a)).setCurve(d).add(0,b,1).start(c)}F.prototype.setCurve=function(a){a&&(this.ha=Ba(a));return this};F.prototype.add=function(a,b,c,d){this.w.push({delay:a,func:b,duration:c,curve:Ba(d)});return this};F.prototype.start=function(a){return new H(this.C,this.L,this.w,this.ha,a)};
-function H(a,b,c,d,e){this.C=a;this.L=b;this.w=[];for(b=0;b<c.length;b++){var f=c[b];this.w.push({delay:f.delay,func:f.func,duration:f.duration,curve:f.curve||d,started:!1,completed:!1})}this.na=e;this.qa=Date.now();this.ca=!0;this.la={};c=new ma;this.ka=c.promise;this.pa=c.resolve;this.oa=c.reject;this.ma=this.C.createAnimTask(this.L,{mutate:this.ra.bind(this)});this.C.canAnimate(this.L)?this.ma(this.la):(v().warn("Animation","cannot animate"),I(this,!1,0))}
-H.prototype.then=function(a,b){return a||b?this.ka.then(a,b):this.ka};H.prototype.thenAlways=function(a){a=a||Ca;return this.then(a,a)};H.prototype.halt=function(a){I(this,!1,a||0)};
-function I(a,b,c){if(a.ca){a.ca=!1;if(0!=c){1<a.w.length&&a.w.sort(function(a,b){return a.delay+a.duration-(b.delay+b.duration)});try{if(0<c)for(c=0;c<a.w.length;c++)a.w[c].func(1,!0);else for(var d=a.w.length-1;0<=d;d--)a.w[d].func(0,!1)}catch(e){v().error("Animation","completion failed: "+e,e),b=!1}}b?a.pa():a.oa()}}
-H.prototype.ra=function(){if(this.ca){for(var a=Date.now(),b=Math.min((a-this.qa)/this.na,1),c=0;c<this.w.length;c++){var d=this.w[c];!d.started&&b>=d.delay&&(d.started=!0)}for(c=0;c<this.w.length;c++)if(d=this.w[c],d.started&&!d.completed)a:{var e;if(0<d.duration){var f=e=Math.min((b-d.delay)/d.duration,1);if(d.curve&&1!=f)try{f=d.curve(e)}catch(h){v().error("Animation","step curve failed: "+h,h);I(this,!1,0);break a}}else f=e=1;1==e&&(d.completed=!0);try{d.func(f,d.completed)}catch(h){v().error("Animation",
-"step mutate failed: "+h,h),I(this,!1,0)}}1==b?I(this,!0,0):this.C.canAnimate(this.L)?this.ma(this.la):(v().warn("Animation","cancel animation"),I(this,!1,0))}};function Da(a){var b=a.documentElement;return["\u26a14email","amp4email"].some(function(a){return b.hasAttribute(a)})};function Ea(a){var b=Fa,c=a.parent&&a.parent!=a?a.document:null;try{return new a.IntersectionObserver(b,{root:c,rootMargin:"25%",threshold:void 0})}catch(d){return new a.IntersectionObserver(b,{rootMargin:"150px",threshold:void 0})}}var J=new WeakMap,K=new WeakMap;function L(a,b){var c=a.ownerDocument.defaultView,d=J.get(c);d||J.set(c,d=Ea(c));K.set(a,b);d.observe(a)}function M(a){var b=J.get(a.ownerDocument.defaultView);b&&b.unobserve(a);K.delete(a)}
-function Fa(a){for(var b=0;b<a.length;b++){var c=a[b],d=c.isIntersecting;K.get(c.target)(d)}};function N(a){a=AMP.BaseElement.call(this,a)||this;a.J=null;a.I=null;a.P=!1;return a}n(N,AMP.BaseElement);g=N.prototype;
-g.buildCallback=function(){var a=this,b=w(this.win,"input");if(Da(this.element.ownerDocument)||this.element.hasAttribute("controls"))this.P=!0,this.element.classList.add("i-amphtml-carousel-has-controls");else b.onMouseDetected(function(b){b&&(a.P=!0,ta(a.element,!a.P),a.element.classList.add("i-amphtml-carousel-has-controls"))},!0);this.buildCarousel();this.buildButtons();this.setupGestures();this.setControlsState()};g.viewportCallbackTemp=function(a){a&&this.hintControls()};
-g.buildButton=function(a,b){var c=this.element.ownerDocument.createElement("div");c.tabIndex=0;c.classList.add("amp-carousel-button");c.classList.add(a);c.setAttribute("role",this.buttonsAriaRole());c.onkeydown=function(a){"Enter"!=a.key&&" "!=a.key||a.defaultPrevented||(a.preventDefault(),b())};c.onclick=b;return c};g.buttonsAriaRole=function(){return"button"};
-g.buildButtons=function(){var a=this;this.J=this.buildButton("amp-carousel-button-prev",function(){a.interactionPrev()});this.element.appendChild(this.J);this.I=this.buildButton("amp-carousel-button-next",function(){a.interactionNext()});this.updateButtonTitles();this.element.appendChild(this.I)};g.prerenderAllowed=function(){return!0};g.isRelayoutNeeded=function(){return!0};g.buildCarousel=function(){};g.setupGestures=function(){};g.go=function(a,b,c){c=void 0===c?!1:c;this.goCallback(a,b,c)};
-g.goCallback=function(){};g.setControlsState=function(){this.J.classList.toggle("amp-disabled",!this.hasPrev());this.J.setAttribute("aria-disabled",!this.hasPrev());this.I.classList.toggle("amp-disabled",!this.hasNext());this.I.setAttribute("aria-disabled",!this.hasNext())};
-g.hintControls=function(){var a=this;this.P||this.getVsync().mutate(function(){a.element.classList.add("i-amphtml-carousel-button-start-hint");D(a.win).delay(function(){a.mutateElement(function(){a.element.classList.remove("i-amphtml-carousel-button-start-hint");ta(a.element,!a.P)})},4E3)})};g.updateButtonTitles=function(){this.I.title=this.getNextButtonTitle();this.J.title=this.getPrevButtonTitle()};
-g.getNextButtonTitle=function(){return this.element.getAttribute("data-next-button-aria-label")||"Next item in carousel"};g.getPrevButtonTitle=function(){return this.element.getAttribute("data-prev-button-aria-label")||"Previous item in carousel"};g.layoutCallback=function(){var a=this;L(this.element,function(b){return a.viewportCallbackTemp(b)});return q()};g.unlayoutCallback=function(){M(this.element);return!0};g.hasPrev=function(){};g.hasNext=function(){};
-g.interactionNext=function(){this.I.classList.contains("amp-disabled")||this.go(1,!0,!1)};g.interactionPrev=function(){this.J.classList.contains("amp-disabled")||this.go(-1,!0,!1)};C({c:!0,v:!0,a:!0,ad:!0});function Ga(a){var b="";try{"localStorage"in a&&(b=a.localStorage.getItem("amp-experiment-toggles"))}catch(e){v().warn("EXPERIMENTS","Failed to retrieve experiments from localStorage.")}var c=b?b.split(/\s*,\s*/g):[];a=Object.create(null);for(var d=0;d<c.length;d++)0!=c[d].length&&("-"==c[d][0]?a[c[d].substr(1)]=!1:a[c[d]]=!0);return a};var O,Ha="Webkit webkit Moz moz ms O o".split(" ");function Ia(a,b){if(b.startsWith("--"))return b;O||(O=Object.create(null));var c=O[b];if(!c){c=b;if(void 0===a[b]){var d=b.charAt(0).toUpperCase()+b.slice(1);a:{for(var e=0;e<Ha.length;e++){var f=Ha[e]+d;if(void 0!==a[f]){d=f;break a}}d=""}var h=d;void 0!==a[h]&&(c=h)}O[b]=c}return c}function Ja(a,b){var c=Ia(a.style,"order");c&&(c.startsWith("--")?a.style.setProperty(c,b):a.style[c]=b)}
-function Ka(a){var b=Ia(a.style,"scrollSnapType");if(b)return b.startsWith("--")?a.style.getPropertyValue(b):a.style[b]};var P;function La(a,b,c){var d={passive:!0},e=Ma(),f=!1;d&&(f=d.capture);a.addEventListener(b,function(a){try{return c(a)}catch(k){throw self.__AMP_REPORT_ERROR(k),k;}},e?d:f)}function Ma(){if(void 0!==P)return P;P=!1;try{var a={get capture(){P=!0}};self.addEventListener("test-options",null,a);self.removeEventListener("test-options",null,a)}catch(b){}return P};function Q(a,b,c){La(a,b,c)};function R(a,b){return function(c){return a+(b-a)*c}};function S(a){a=N.call(this,a)||this;a.m=0;a.ba=0;a.F=null;a.A=null;a.ea=null;return a}n(S,N);g=S.prototype;g.isLayoutSupported=function(a){return"fixed"==a||"fixed-height"==a};
-g.buildCarousel=function(){var a=this;this.F=this.getRealChildren();this.A=this.element.ownerDocument.createElement("div");this.A.classList.add("i-amphtml-scrollable-carousel-container");this.A.setAttribute("tabindex","-1");this.element.appendChild(this.A);this.F.forEach(function(b){y(a.element).setOwner(b,a.element);b.classList.add("amp-carousel-slide");b.classList.add("amp-scrollable-carousel-slide");a.A.appendChild(b)});this.W();this.A.addEventListener("scroll",this.da.bind(this));this.A.addEventListener("keydown",
-this.$.bind(this));this.registerAction("goToSlide",function(b){var c=b.args;c&&(c=parseInt(c.index,10),Na(a,c))},1);na(this.element).addToAllowlist("amp-carousel","goToSlide",["email"])};g.buttonsAriaRole=function(){return"presentation"};g.layoutCallback=function(){var a=this;L(this.element,function(b){return a.viewportCallbackTemp(b)});Oa(this,this.m);Pa(this,this.m,1);this.setControlsState();return q()};g.unlayoutCallback=function(){M(this.element);return N.prototype.unlayoutCallback.call(this)};
-g.viewportCallbackTemp=function(a){N.prototype.viewportCallbackTemp.call(this,a);Qa(this,this.m,this.m)};g.goCallback=function(a,b){var c=this,d=Ra(this,this.m,a),e=this.m;if(d!=e)if(b){var f=R(e,d);G(this.element,function(a){c.A.scrollLeft=f(a)},200,"ease-in-out").thenAlways(function(){T(c,d)})}else T(this,d),this.A.scrollLeft=d};
-function Na(a,b){var c=a.F.length;if(!isFinite(b)||0>b||b>=c)a.user().error("amp-scrollable-carousel","Invalid [slide] value: %s",b),q();else{var d=a.m,e=d;a.measureMutateElement(function(){e=a.F[b].offsetLeft-(a.element.offsetWidth-a.F[b].offsetWidth)/2},function(){if(e!=d){var b=R(d,e);G(a.element,function(c){a.A.scrollLeft=b(c)},200,"ease-in-out").thenAlways(function(){T(a,e)})}})}}g.da=function(){var a=this.A.scrollLeft;this.m=a;null===this.ea&&Sa(this,a)};
-g.$=function(a){var b=a.key;"ArrowLeft"!=b&&"ArrowRight"!=b||a.stopPropagation()};function Sa(a,b){a.ea=D(a.win).delay(function(){30>Math.abs(b-a.m)?(v().fine("amp-scrollable-carousel","slow scrolling: %s - %s",b,a.m),a.ea=null,T(a,a.m)):(v().fine("amp-scrollable-carousel","fast scrolling: %s - %s",b,a.m),Sa(a,a.m))},100)}function T(a,b){Qa(a,b,a.ba);Oa(a,b);Pa(a,b,Math.sign(b-a.ba));a.ba=b;a.m=b;a.setControlsState()}
-function Ra(a,b,c){var d=a.element.offsetWidth,e=a.A.scrollWidth;a=b+c*d;return 0>a?0:e>=d&&a>e-d?e-d:a}function U(a,b,c){for(var d=a.element.getLayoutWidth(),e=0;e<a.F.length;e++){var f=a.F[e];f.offsetLeft+f.offsetWidth>=b&&f.offsetLeft<=b+d&&c(f)}}function Oa(a,b){U(a,b,function(b){y(a.element).scheduleLayout(a.element,b)})}function Pa(a,b,c){var d=Ra(a,b,c);d!=b&&U(a,d,function(b){y(a.element).schedulePreload(a.element,b)})}
-function Qa(a,b,c){var d=[];U(a,b,function(b){d.push(b);y(a.element).updateInViewport(a.element,b,!0)});c!=b&&U(a,c,function(b){if(!d.includes(b)){var c=y(a.element);c.updateInViewport(a.element,b,!1);c.schedulePause(a.element,b)}})}g.hasPrev=function(){return 0!=this.m};g.hasNext=function(){var a=this.element.getLayoutWidth();return this.m!=Math.max(this.A.scrollWidth-a,0)};g.W=function(){Q(this.element,"touchmove",function(a){return a.stopPropagation()})};function V(a){a=N.call(this,a)||this;a.R=null;a.N=!1;a.aa=!1;a.G=!1;a.ga=5E3;a.H=null;a.ja=0;a.shouldLoop=!1;a.B=!1;return a}n(V,N);g=V.prototype;
-g.buildCarousel=function(){var a=this;this.N=this.element.hasAttribute("loop");this.G=this.element.hasAttribute("autoplay");var b=this.element.getAttribute("autoplay");b&&(this.H=parseInt(b,10),la(ia(this.H)));this.buildSlides();this.shouldLoop=this.N&&this.isLoopingEligible();(this.B=this.G&&this.isLoopingEligible())&&0!=this.H&&Ta(this);this.registerAction("toggleAutoplay",function(b){(b=b.args)&&void 0!==b.toggleOn?Ua(a,b.toggleOn):Ua(a,!a.G)},1)};g.buildSlides=function(){};
-g.viewportCallbackTemp=function(a){N.prototype.viewportCallbackTemp.call(this,a);a?W(this):this.clearAutoplay()};g.goCallback=function(a,b,c){this.moveSlide(a,b,c?1:3);c?W(this):this.clearAutoplay()};g.moveSlide=function(){};g.isLoopingEligible=function(){return!1};function Ta(a){var b=Number(a.element.getAttribute("delay"));0<b&&(a.ga=Math.max(1E3,b));a.N||(a.element.setAttribute("loop",""),a.aa=!0,a.N=!0,a.shouldLoop=!0)}
-function W(a){a.B&&0!=a.H&&(a.clearAutoplay(),a.R=D(a.win).delay(a.go.bind(a,1,!0,!0),a.ga))}function Ua(a,b){if(b!=a.B){var c=a.B;a.G=b;a.B=a.G&&a.isLoopingEligible();!c&&a.B&&Ta(a);a.B?W(a):a.clearAutoplay()}}g.clearAutoplay=function(){null!==this.R&&(D(this.win).cancel(this.R),this.R=null)};g.removeAutoplay=function(){this.clearAutoplay();this.aa&&(this.element.removeAttribute("loop"),this.shouldLoop=this.N=this.aa=!1);this.B=this.G=!1};function X(a,b,c){c=void 0===c?{}:c;var d=void 0===d?!0:d;var e=c;ua(a).then(function(c){c&&c.triggerEventForTarget(a,b,e,d)})};function Y(a){a=V.call(this,a)||this;a.C=null;a.O=!1;a.o=[];a.j=0;a.l=null;a.K=[];a.U=!1;a.T=null;a.Z=!1;a.M=0;a.h=null;a.ia=0;a.D=0;a.S=0;a.X=[];var b=w(a.win,"platform");a.Y=b.isIos();a.V=null;if(w(a.win,"platform").getIosVersionString().startsWith("10.3"))var c=!0;else if(a.Y)c=!1;else{var d=a.win;if(d.__AMP__EXPERIMENT_TOGGLES)c=d.__AMP__EXPERIMENT_TOGGLES;else{d.__AMP__EXPERIMENT_TOGGLES=Object.create(null);c=d.__AMP__EXPERIMENT_TOGGLES;if(d.AMP_CONFIG)for(var e in d.AMP_CONFIG){var f=d.AMP_CONFIG[e];
-"number"===typeof f&&0<=f&&1>=f&&(c[e]=Math.random()<f)}if(d.AMP_CONFIG&&Array.isArray(d.AMP_CONFIG["allow-doc-opt-in"])&&0<d.AMP_CONFIG["allow-doc-opt-in"].length&&(e=d.AMP_CONFIG["allow-doc-opt-in"],f=d.document.head.querySelector('meta[name="amp-experiments-opt-in"]'))){f=f.getAttribute("content").split(",");for(var h=0;h<f.length;h++)-1!=e.indexOf(f[h])&&(c[f[h]]=!0)}Object.assign(c,Ga(d));if(d.AMP_CONFIG&&Array.isArray(d.AMP_CONFIG["allow-url-opt-in"])&&0<d.AMP_CONFIG["allow-url-opt-in"].length){e=
-d.AMP_CONFIG["allow-url-opt-in"];f=d.location.originalHash||d.location.hash;d=Object.create(null);if(f)for(var k;k=ha.exec(f);)h=fa(k[1],k[1]),k=k[2]?fa(k[2].replace(/\+/g," "),k[2]):"",d[h]=k;for(f=0;f<e.length;f++)h=d["e-"+e[f]],"1"==h&&(c[e[f]]=!0),"0"==h&&(c[e[f]]=!1)}}c=!c["amp-carousel-chrome-scroll-snap"]}a.fa=c;return a}n(Y,V);g=Y.prototype;g.isLayoutSupported=function(a){return"fixed"==a||"fixed-height"==a||"responsive"==a||"fill"==a||"flex-item"==a||"fluid"==a||"intrinsic"==a};
-g.buildSlides=function(){var a=this;this.C=this.getVsync();this.V=na(this.element);this.V.addToAllowlist("AMP-CAROUSEL","goToSlide",["email"]);this.O=void 0!=Ka(this.element);this.fa&&(this.O=!1);this.element.classList.add("i-amphtml-slidescroll");this.o=this.getRealChildren();this.j=this.o.length;this.l=this.win.document.createElement("div");this.l.setAttribute("tabindex","-1");this.l.classList.add("i-amphtml-slides-container");this.l.setAttribute("aria-live","polite");this.fa&&this.l.classList.add("i-amphtml-slidescroll-no-snap");
-if(this.O){var b=this.win.document.createElement("div");b.classList.add("i-amphtml-carousel-start-marker");this.l.appendChild(b);b=this.win.document.createElement("div");b.classList.add("i-amphtml-carousel-end-marker");this.l.appendChild(b)}this.element.appendChild(this.l);this.o.forEach(function(b,d){a.X.push(b.getAttribute("data-slide-id")||d.toString());y(a.element).setOwner(b,a.element);b.classList.add("amp-carousel-slide");var c=a.win.document.createElement("div");c.classList.add("i-amphtml-slide-item");
-a.l.appendChild(c);c.appendChild(b);a.K.push(c)});this.W();this.l.addEventListener("scroll",this.da.bind(this));this.l.addEventListener("keydown",this.$.bind(this));Q(this.l,"touchmove",this.ta.bind(this));Q(this.l,"touchend",this.sa.bind(this));this.registerAction("goToSlide",function(b){(b=b.args)&&a.goToSlide(b.index,3)},1)};g.isLoopingEligible=function(){return 1<this.j};g.mutatedAttributesCallback=function(a){var b=a.slide;void 0!==b&&this.goToSlide(b,3)};
-g.ta=function(){this.clearAutoplay();this.Z=!0};function Va(a,b){a.T&&D(a.win).cancel(a.T);a.T=D(a.win).delay(function(){a.T=null;if(!a.U&&!a.Z){var b=a.l.scrollLeft;a.O?Wa(a,b,1):Z(a,b,void 0,1)}},b)}g.sa=function(){var a=this.fa?45:100;this.Z=!1;Va(this,a)};g.onLayoutMeasure=function(){this.D=this.element.getLayoutWidth()};
-g.layoutCallback=function(){var a=this;L(this.element,function(b){return a.viewportCallbackTemp(b)});if(sa(this.element))return q();if(null===this.h)Xa(this,this.ia);else{var b=u().assertNumber(this.h,"E#19457 this.slideIndex_"),c=Ya(this,b);y(this.element).scheduleLayout(this.element,this.o[b]);this.S=this.l.scrollLeft=c}return q()};g.unlayoutCallback=function(){M(this.element);this.h=null;return V.prototype.unlayoutCallback.call(this)};
-g.viewportCallbackTemp=function(a){V.prototype.viewportCallbackTemp.call(this,a);null!==this.h&&y(this.element).updateInViewport(this.element,this.o[u().assertNumber(this.h,"E#19457 this.slideIndex_")],a)};g.hasPrev=function(){return this.shouldLoop||0<this.h};g.hasNext=function(){return this.shouldLoop||this.h<this.o.length-1};
-g.moveSlide=function(a,b,c){if(null!==this.h){var d=this.hasNext(),e=this.hasPrev();if(1==a&&d||-1==a&&e){var f=this.h+a;-1==f?f=this.j-1:f>=this.j&&(f=0);b?Z(this,1!=a||e?this.D:0,a,c):Za(this,f,c)}}};g.da=function(){var a=this.l.scrollLeft;this.Y||$a(this,a);Va(this,this.O?200:this.Y?45:100);this.S=a};g.$=function(a){var b=a.key;"ArrowLeft"!=b&&"ArrowRight"!=b||a.stopPropagation()};
-function $a(a,b){var c=a.l.scrollWidth;-1==a.M&&b>=a.S?Z(a,b).then(function(){a.M=0}):1==a.M&&b<=a.S?Z(a,b).then(function(){a.M=0}):a.M=0>b?-1:b+a.D>c?1:0}function Z(a,b,c,d){a.U=!0;var e=ab(a,b)-a.h,f=a.hasPrev(),h=f?a.D:0;0!=e||1!=c&&-1!=c||(e=c);if(1==e||-1!=e&&e==-1*(a.j-1))h=f?2*a.D:a.D;else if(-1==e||e==a.j-1)h=0;return bb(a,b,h).then(function(){Wa(a,h,d)})}
-function ab(a,b){var c=Math.round(b/a.D),d=0;b=a.hasPrev();var e=a.hasNext();b&&e?d=c-1:e?d=c:b&&(d=c-1);b=a.h+d;return b=a.shouldLoop?0>b?a.j-1:b>=a.j?0:b:0>b?0:b>=a.j?a.j-1:b}function cb(a,b){var c=String(b+1),d=String(a.j);return" "+(a.element.getAttribute("data-button-count-format")||"(%s of %s)").replace("%s",c).replace("%s",d)}g.getPrevButtonTitle=function(){var a=this.h;a=0<=a-1?a-1:this.shouldLoop?this.j-1:null;a=null==a?0:a;return V.prototype.getPrevButtonTitle.call(this)+cb(this,a)};
-g.getNextButtonTitle=function(){var a=this.h;a=a+1<this.j?a+1:this.shouldLoop?0:null;a=null==a?this.j-1:a;return V.prototype.getNextButtonTitle.call(this)+cb(this,a)};function Wa(a,b,c){if(ia(b)&&null!==a.h){a.U=!0;var d=ab(a,b);a.C.mutate(function(){Za(a,d,c);a.C.mutate(function(){a.U=!1})})}}g.goToSlide=function(a,b){var c=parseInt(a,10);!isFinite(c)||0>c||c>=this.j?this.user().error("AMP-CAROUSEL","Invalid [slide] value: ",a):null===this.h?this.ia=c:Za(this,c,b)};
-function Xa(a,b){var c=a.j;if(0>b||b>=c||a.h==b)return!1;var d=0<=b-1?b-1:a.shouldLoop?a.j-1:null,e=b+1<a.j?b+1:a.shouldLoop?0:null,f=[];null!=d&&f.push(d);f.push(b);null!=e&&e!==d&&f.push(e);null!==a.h&&y(a.element).updateInViewport(a.element,a.o[u().assertNumber(a.h,"E#19457 this.slideIndex_")],!1);var h=a.o[b];if(void 0===h)return v().error("AMP-CAROUSEL","Attempting to access a non-existant slide %s / %s",b,c),!1;y(a.element).updateInViewport(a.element,h,!0);f.forEach(function(c,d){a.shouldLoop&&
-Ja(a.K[c],d+1);a.K[c].classList.add("i-amphtml-slide-item-show");var e=y(a.element);c==b?(e.scheduleLayout(a.element,a.o[c]),e.scheduleResume(a.element,a.o[c]),a.o[c].setAttribute("aria-hidden","false")):(e.schedulePreload(a.element,a.o[c]),a.o[c].setAttribute("aria-hidden","true"))});a.l.scrollLeft=Ya(a,b);db(a,b);a.h=b;a.H&&a.h===a.j-1&&(a.ja++,a.ja==a.H&&a.removeAutoplay());eb(a,f);a.setControlsState();a.updateButtonTitles();return!0}
-function Za(a,b,c){var d=void 0===c?1:c;if(Xa(a,b)){var e=a.win;c=C({index:b});var f={detail:c};Object.assign(f,void 0);"function"==typeof e.CustomEvent?c=new e.CustomEvent("slidescroll.slideChange",f):(e=e.document.createEvent("CustomEvent"),e.initCustomEvent("slidescroll.slideChange",!!f.bubbles,!!f.cancelable,c),c=e);a.V.trigger(a.element,"slideChange",c,d);a.element.dispatchCustomEvent("slideChange",{index:b,actionTrust:d})}}
-function Ya(a,b){var c=a.D;if(!a.shouldLoop&&0==b||1>=a.o.length)c=0;return c}function eb(a,b){for(var c=a.j,d=0;d<c;d++)a.K[d].classList.contains("i-amphtml-slide-item-show")&&(b.includes(d)||(a.shouldLoop&&Ja(a.K[d],""),a.K[d].classList.remove("i-amphtml-slide-item-show"),a.o[d].removeAttribute("aria-hidden")),a.h!=d&&y(a.element).schedulePause(a.element,a.o[d]))}function bb(a,b,c){if(b==c)return q();var d=R(b,c);c=E(.8,0,.6,1);return G(a.l,function(b){a.l.scrollLeft=d(b)},80,c).thenAlways()}
-g.W=function(){Q(this.element,"touchmove",function(a){return a.stopPropagation()})};function db(a,b){var c=b-a.h;if(0!=c){1!==Math.abs(c)&&(c=0>c?1:-1,null===a.h&&(c=1));var d=C({fromSlide:null===a.h?"null":a.X[a.h],toSlide:a.X[b]});X(a.element,"amp-carousel-change",d);1==c?X(a.element,"amp-carousel-next",d):X(a.element,"amp-carousel-prev",d)}};function fb(){return AMP.BaseElement.apply(this,arguments)||this}n(fb,AMP.BaseElement);fb.prototype.upgradeCallback=function(){return"slides"==this.element.getAttribute("type")?new Y(this.element):new S(this.element)};(function(a){a.registerElement("amp-carousel",fb,".amp-carousel-slide>.i-amphtml-replaced-content{-o-object-fit:contain;object-fit:contain}.amp-carousel-button{position:absolute;box-sizing:border-box;top:50%;height:34px;width:34px;border-radius:2px;opacity:0;pointer-events:all;background-color:rgba(0,0,0,0.5);background-position:50% 50%;background-repeat:no-repeat;transform:translateY(-50%);visibility:hidden;z-index:10}.amp-carousel-button:focus{border:1px solid #000;outline:1px solid #fff}.amp-mode-mouse .amp-carousel-button,amp-carousel.i-amphtml-carousel-has-controls .amp-carousel-button,amp-carousel[controls] .amp-carousel-button{opacity:1;visibility:visible}.amp-carousel-button-prev{left:16px;background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff'%3E%3Cpath d='M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z'/%3E%3C/svg%3E\");background-size:18px 18px}.amp-carousel-button-next{right:16px;background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff'%3E%3Cpath d='M9 3L7.94 4.06l4.19 4.19H3v1.5h9.13l-4.19 4.19L9 15l6-6z'/%3E%3C/svg%3E\");background-size:18px 18px}.i-amphtml-carousel-button-start-hint .amp-carousel-button:not(.amp-disabled){animation:i-amphtml-carousel-hint 1s ease-in 3s 1 normal both}.amp-mode-mouse .i-amphtml-carousel-button-start-hint .amp-carousel-button:not(.amp-disabled){animation:none}@keyframes i-amphtml-carousel-hint{0%{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}amp-carousel .amp-carousel-button.amp-disabled{animation:none;opacity:0;visibility:hidden}amp-carousel[i-amphtml-carousel-hide-buttons] .amp-carousel-button-next,amp-carousel[i-amphtml-carousel-hide-buttons] .amp-carousel-button-prev{opacity:0;pointer-events:none;visibility:visible!important}.i-amphtml-slides-container{display:-ms-flexbox!important;display:flex!important;-ms-flex-wrap:nowrap;flex-wrap:nowrap;height:100%!important;left:0;overflow-x:auto!important;overflow-y:hidden!important;position:absolute!important;top:0;width:100%!important;scroll-snap-type:x mandatory!important;scrollbar-width:none;padding-bottom:20px!important;box-sizing:content-box!important;-webkit-overflow-scrolling:touch!important}.i-amphtml-slides-container::-webkit-scrollbar{display:none!important}.i-amphtml-slides-container.i-amphtml-no-scroll{overflow-x:hidden!important}.i-amphtml-slide-item{-ms-flex-align:center!important;align-items:center!important;display:none!important;-ms-flex:0 0 100%!important;flex:0 0 100%!important;height:100%!important;-ms-flex-pack:center!important;justify-content:center!important;position:relative!important;scroll-snap-align:start!important;width:100%!important}.i-amphtml-slide-item>*{height:100%;width:100%;overflow:hidden!important}.i-amphtml-slide-item-show{display:-ms-flexbox!important;display:flex!important}.i-amphtml-carousel-end-marker,.i-amphtml-carousel-start-marker{background-color:transparent!important;display:block!important;-ms-flex:0 0 1px!important;flex:0 0 1px!important;height:100%!important;position:relative!important;scroll-snap-align:start!important;width:1px!important}.i-amphtml-carousel-start-marker{-ms-flex-order:-1!important;order:-1!important;margin-left:-1px!important}.i-amphtml-carousel-end-marker{-ms-flex-order:100000000!important;order:100000000!important;margin-right:-1px!important}.i-amphtml-slidescroll-no-snap.i-amphtml-slides-container{scroll-snap-type:none!important}.i-amphtml-slidescroll-no-snap .i-amphtml-slide-item{scroll-snap-align:none!important}.i-amphtml-slidescroll-no-snap.i-amphtml-slides-container.i-amphtml-no-scroll{-webkit-overflow-scrolling:auto!important}.amp-scrollable-carousel-slide{display:inline-block!important;margin-left:8px}.amp-scrollable-carousel-slide:first-child{margin-left:0px}.i-amphtml-scrollable-carousel-container{white-space:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch!important}\n/*# sourceURL=/extensions/amp-carousel/0.1/amp-carousel.css*/")})(self.AMP);
-})});
 
-//# sourceMappingURL=amp-carousel-0.1.js.map
+<!DOCTYPE html>
+<html amp>
+<head>
+  <!-- Site made with Mobirise Website Builder v4.8.8, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.8.8, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo1-162x159.png" type="image/x-icon">
+  <meta name="description" content="New LightAMP HTML Template - Download Now">
+  <title>Dance School Website Example</title>
+  
+<link rel="canonical" href="demo-page2.html">
+ <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+<noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+<link href="https://fonts.googleapis.com/css?family=Reem+Kufi" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+ 
+ <style amp-custom> 
+div,span,h1,h2,h3,h4,h5,h6,p,blockquote,a,ol,ul,li,figcaption{font: inherit;}*{-webkit-box-sizing: border-box;box-sizing: border-box;}body{position: relative;font-style: normal;line-height: 1.5;color: #232323;}section{background-color: #eeeeee;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover;overflow: hidden;}section.menu{min-height: 80px;}section,.container,.container-fluid{position: relative;word-wrap: break-word;}a.mbr-iconfont:hover{text-decoration: none;}h1,h2,h3{margin: auto;}h1,h3,p{padding: 10px 0;margin-bottom: 15px;}p,li,blockquote{color: #15181b;letter-spacing: 0.5px;line-height: 1.7;}ul,ol,pre,blockquote,h4{margin-bottom: 0;margin-top: 0;}pre{background: #f4f4f4;padding: 10px 24px;white-space: pre-wrap;}p{margin-top: 0;}a{font-style: normal;font-weight: 400;cursor: pointer;}a,a:hover{text-decoration: none;}figure{margin-bottom: 0;}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.display-1,.display-2,.display-3,.display-4{line-height: 1;word-break: break-word;word-wrap: break-word;}b,strong{font-weight: bold;}blockquote{padding: 10px 0 10px 20px;position: relative;border-left: 3px solid;}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,input:-webkit-autofill:active{-webkit-transition-delay: 9999s;transition-delay: 9999s;-webkit-transition-property: background-color,color;-o-transition-property: background-color,color;transition-property: background-color,color;}html,body{height: auto;min-height: 100vh;}.mbr-section-title{font-style: normal;line-height: 1.2;}.mbr-section-subtitle{line-height: 1.3;}.mbr-text{font-style: normal;line-height: 1.6;}.btn{font-weight: 400;border-width: 2px;border-style: solid;font-style: normal;letter-spacing: 2px;margin: .4rem .8rem;white-space: normal;-webkit-transition: all .3s ease-in-out,-webkit-box-shadow 2s ease-in-out;transition: all .3s ease-in-out,-webkit-box-shadow 2s ease-in-out;-o-transition: all .3s ease-in-out,box-shadow 2s ease-in-out;transition: all .3s ease-in-out,box-shadow 2s ease-in-out;transition: all .3s ease-in-out,box-shadow 2s ease-in-out,-webkit-box-shadow 2s ease-in-out;display: -webkit-inline-box;display: -ms-inline-flexbox;display: inline-flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;word-break: break-word;-webkit-align-items: center;-webkit-justify-content: center;display: -webkit-inline-flex;}.btn-underline{position: relative;display: inline-block;margin-right: .4rem;margin-left: .4rem;}.btn-underline:after{content: "";display: block;width: 100%;height: 2px;-webkit-transition: all .3s ease-in-out 0.2s;-o-transition: all .3s ease-in-out 0.2s;transition: all .3s ease-in-out 0.2s;margin-top: 2px;}.btn-underline:before{content: "";display: block;width: 0;height: 2px;position: absolute;right: 0;bottom: 0;-webkit-transition: all .3s ease-in-out 0s;-o-transition: all .3s ease-in-out 0s;transition: all .3s ease-in-out 0s;margin-top: 2px;}.btn-underline:hover:after{-webkit-transition: all .3s ease-in-out 0s;-o-transition: all .3s ease-in-out 0s;transition: all .3s ease-in-out 0s;-webkit-transition-delay: none;-o-transition-delay: none;transition-delay: none;width: 0;}.btn-underline:hover:before{-webkit-transition: all .3s ease-in-out 0.2s;-o-transition: all .3s ease-in-out 0.2s;transition: all .3s ease-in-out 0.2s;width: 100%;}.btn-form{border-radius: 0;}.btn-form:hover{cursor: pointer;}.mbr-figure img,.mbr-figure iframe{display: block;width: 100%;}.card{background-color: transparent;border: none;}.card-wrapper{-webkit-box-flex: 1;-ms-flex: 1;flex: 1;-webkit-flex: 1;}.card-img{text-align: center;-ms-flex-negative: 0;flex-shrink: 0;-webkit-flex-shrink: 0;}.media{max-width: 100%;margin: 0 auto;}.mbr-figure{-ms-flex-item-align: center;-ms-grid-row-align: center;-webkit-align-self: center;align-self: center;}.media-container > div{max-width: 100%;}.mbr-figure img,.card-img img{width: 100%;}@media (max-width: 991px){.media-size-item{width: auto;}.media{width: auto;}.mbr-figure{width: 100%;}}.l-spacing3{letter-spacing: 3px;}.l-spacing-3{letter-spacing: -.3px;}.amp-carousel-button{width: 50px;height: 50px;}.amp-carousel-button:hover{cursor: pointer;}.amp-carousel-button-next{background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff' viewBox='0 0 129 129'%3E%3Cpath d='m40.4,121.3c-0.8,0.8-1.8,1.2-2.9,1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8,0l53.9,53.9c1.6,1.6 1.6,4.2 0,5.8l-53.9,53.9z'/%3E%3C/svg%3E");}.amp-carousel-button-prev{background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff' viewBox='0 0 129 129'%3E%3Cpath d='m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z'/%3E%3C/svg%3E");}.popup-btn:hover{cursor: pointer;}.hidden{visibility: hidden;}.super-hide{display: none;}.inactive{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;pointer-events: none;-webkit-user-drag: none;user-drag: none;}textarea[type="hidden"]{display: none;}#scrollToTop{display: none;}.popover-content ul.show{min-height: 155px;}.mbr-white{color: #ffffff;}.mbr-black{color: #000000;}.mbr-bg-white{background-color: #ffffff;}.mbr-bg-black{background-color: #000000;}.align-left{text-align: left;}.align-center{text-align: center;}.align-right{text-align: right;}@media (max-width: 767px){.align-left,.align-center,.align-right,.mbr-section-btn,.mbr-section-title{text-align: center;}}.mbr-light{font-weight: 300;}.mbr-regular{font-weight: 400;}.mbr-semibold{font-weight: 500;}.mbr-bold{font-weight: 700;}.mbr-section-btn{margin-left: -.25rem;margin-right: -.25rem;font-size: 0;}nav .mbr-section-btn{margin-left: 0rem;margin-right: 0rem;}.btn .mbr-iconfont,.btn.btn-sm .mbr-iconfont{cursor: pointer;margin-right: 0.5rem;}.btn.btn-md .mbr-iconfont,.btn.btn-md .mbr-iconfont{margin-right: 0.8rem;}[type="submit"]{-webkit-appearance: none;}.mbr-fullscreen .mbr-overlay{min-height: 100vh;}.mbr-fullscreen{display: -webkit-box;display: -ms-flexbox;display: flex;display: -moz-flex;display: -ms-flex;display: -o-flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-align-items: center;min-height: 100vh;-webkit-box-sizing: border-box;box-sizing: border-box;padding-top: 3rem;padding-bottom: 3rem;}.mbr-overlay{background-color: #000;bottom: 0;left: 0;opacity: .5;position: absolute;right: 0;top: 0;z-index: 0;}.mbr-parallax-bg{bottom: 0;left: 0;opacity: .5;position: absolute;right: 0;top: 0;z-index: 0;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover;}section.sidebar-open:before{content: '';position: fixed;top: 0;bottom: 0;right: 0;left: 0;background-color: rgba(0,0,0,0.2);z-index: 1040;}form input,form textarea{padding: .8rem;border: 0px;background: #ececec;}form .fieldset{display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: center;-ms-flex-align: center;align-items: center;display: -webkit-flex;-webkit-justify-content: center;-webkit-flex-wrap: wrap;-webkit-align-items: center;}amp-img img{max-height: 100%;max-width: 100%;}img.mbr-temp{width: 100%;}.is-builder .nodisplay + img[async],.is-builder .nodisplay + img[decoding="async"],.is-builder amp-img > a + img[async],.is-builder amp-img > a + img[decoding="async"]{display: none;}html:not(.is-builder) amp-img > a{position: absolute;top: 0;bottom: 0;left: 0;right: 0;z-index: 1;}.is-builder .temp-amp-sizer{position: absolute;}.is-builder amp-youtube .temp-amp-sizer,.is-builder amp-vimeo .temp-amp-sizer{position: static;}.is-builder section.horizontal-menu .ampstart-btn{display: none;}@media (max-width: 991px){.is-builder section.horizontal-menu .navbar-toggler{display: block;}}.is-builder section.horizontal-menu .dropdown-menu{z-index: auto;opacity: 1;pointer-events: auto;}.is-builder section.horizontal-menu .nav-dropdown .link.dropdown-toggle[aria-expanded="true"]{margin-right: 0;padding: 0.667em 1em;}@media (max-width: 767px){.is-builder section.menu .navbar-collapse{max-height: 60vh;overflow-y: auto;}}.is-builder section.features4 .full-link,.is-builder section.features13 .full-link{z-index: 0;}.container{padding-right: 15px;padding-left: 15px;width: 100%;margin-right: auto;margin-left: auto;}@media (max-width: 767px){.container{max-width: 540px;}}@media (min-width: 768px){.container{max-width: 720px;}}@media (min-width: 992px){.container{max-width: 960px;}}@media (min-width: 1200px){.container{max-width: 1140px;}}@media (min-width: 1600px){.container{max-width: 1540px;}}.mbr-row{display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;}.mbr-justify-content-center{-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;-webkit-justify-content: center;}@media (max-width: 767px){.mbr-col-sm-12{-ms-flex: 0 0 100%;-webkit-box-flex: 0;flex: 0 0 100%;max-width: 100%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 100%;}.mbr-row{margin: 0;}}@media (min-width: 768px){.mbr-col-md-3{-ms-flex: 0 0 25%;-webkit-box-flex: 0;flex: 0 0 25%;max-width: 25%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 25%;}.mbr-col-md-4{-ms-flex: 0 0 33.333333%;-webkit-box-flex: 0;flex: 0 0 33.333333%;max-width: 33.333333%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 33.333333%;}.mbr-col-md-5{-ms-flex: 0 0 41.666667%;-webkit-box-flex: 0;flex: 0 0 41.666667%;max-width: 41.666667%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 41.666667%;}.mbr-col-md-6{-ms-flex: 0 0 50%;-webkit-box-flex: 0;flex: 0 0 50%;max-width: 50%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 50%;}.mbr-col-md-7{-ms-flex: 0 0 58.333333%;-webkit-box-flex: 0;flex: 0 0 58.333333%;max-width: 58.333333%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 58.333333%;}.mbr-col-md-8{-ms-flex: 0 0 66.666667%;-webkit-box-flex: 0;flex: 0 0 66.666667%;max-width: 66.666667%;padding-left: 15px;padding-right: 15px;-webkit-flex: 0 0 66.666667%;}.mbr-col-md-10{-ms-flex: 0 0 83.333333%;-webkit-box-flex: 0;flex: 0 0 83.333333%;max-width: 83.333333%;padding-left: 15px;padding-right: 15px;-webkit-flex: 0 0 83.333333%;}.mbr-col-md-12{-ms-flex: 0 0 100%;-webkit-box-flex: 0;flex: 0 0 100%;max-width: 100%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 100%;}}@media (min-width: 992px){.mbr-col-lg-2{-ms-flex: 0 0 16.666667%;-webkit-box-flex: 0;flex: 0 0 16.666667%;max-width: 16.666667%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 16.666667%;}.mbr-col-lg-3{-ms-flex: 0 0 25%;-webkit-box-flex: 0;flex: 0 0 25%;max-width: 25%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 25%;}.mbr-col-lg-4{-ms-flex: 0 0 33.33%;-webkit-box-flex: 0;flex: 0 0 33.33%;max-width: 33.33%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 33.33%;}.mbr-col-lg-5{-ms-flex: 0 0 41.666%;-webkit-box-flex: 0;flex: 0 0 41.666%;max-width: 41.666%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 41.666%;}.mbr-col-lg-6{-ms-flex: 0 0 50%;-webkit-box-flex: 0;flex: 0 0 50%;max-width: 50%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 50%;}.mbr-col-lg-8{-ms-flex: 0 0 66.666667%;-webkit-box-flex: 0;flex: 0 0 66.666667%;max-width: 66.666667%;padding-left: 15px;padding-right: 15px;-webkit-flex: 0 0 66.666667%;}.mbr-col-lg-10{-ms-flex: 0 0 83.3333%;-webkit-box-flex: 0;flex: 0 0 83.3333%;max-width: 83.3333%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 83.3333%;}.mbr-col-lg-12{-ms-flex: 0 0 100%;-webkit-box-flex: 0;flex: 0 0 100%;max-width: 100%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 100%;}}@media (min-width: 1200px){.mbr-col-xl-4{-ms-flex: 0 0 33.33%;-webkit-box-flex: 0;flex: 0 0 33.33%;max-width: 33.33%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 33.33%;}.mbr-col-xl-6{-ms-flex: 0 0 50%;-webkit-box-flex: 0;flex: 0 0 50%;max-width: 50%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 50%;}.mbr-col-xl-7{-ms-flex: 0 0 58.333333%;-webkit-box-flex: 0;flex: 0 0 58.333333%;max-width: 58.333333%;padding-right: 15px;padding-left: 15px;-webkit-flex: 0 0 58.333333%;}.mbr-col-xl-8{-ms-flex: 0 0 66.666667%;-webkit-box-flex: 0;flex: 0 0 66.666667%;max-width: 66.666667%;padding-left: 15px;padding-right: 15px;-webkit-flex: 0 0 66.666667%;}}amp-sidebar{background: transparent;}#scrollToTopMarker{position: absolute;width: 0px;height: 0px;top: 300px;}#scrollToTopButton{position: fixed;bottom: 25px;right: 25px;opacity: .4;z-index: 5000;font-size: 32px;height: 60px;width: 60px;border: none;border-radius: 3px;cursor: pointer;}#scrollToTopButton:focus{outline: none;}#scrollToTopButton a:before{content: '';position: absolute;height: 40%;top: 36%;width: 2px;left: calc(50% - 1px);}#scrollToTopButton a:after{content: '';position: absolute;border-top: 2px solid;border-right: 2px solid;width: 40%;height: 40%;left: calc(30% - 1px);bottom: 30%;-ms-transform: rotate(-45deg);transform: rotate(-45deg);-webkit-transform: rotate(-45deg);}.is-builder #scrollToTopButton a:after{left: 30%;}
+body{font-family: Roboto;}blockquote{border-color: #f9d5bd;}.display-1{font-family: 'Reem Kufi',helvetica,arial,sans-serif;font-size: 6rem;}.display-2{font-family: 'Reem Kufi',helvetica,arial,sans-serif;font-size: 4rem;}.display-4{font-family: 'Reem Kufi',helvetica,arial,sans-serif;font-size: 1rem;}.display-5{font-family: 'Reem Kufi',helvetica,arial,sans-serif;font-size: 2.25rem;}.display-6{font-family: 'Roboto',sans-serif;font-size: 1.3rem;}.display-7{font-family: 'Roboto',sans-serif;font-size: 1.1rem;}@media (max-width: 768px){.display-1{font-size: 4.8rem;font-size: calc( 2.75rem + (6 - 2.75) * ((100vw - 20rem) / (48 - 20)));line-height: calc( 1.4 * (2.75rem + (6 - 2.75) * ((100vw - 20rem) / (48 - 20))));}.display-2{font-size: 3.2rem;font-size: calc( 2.05rem + (4 - 2.05) * ((100vw - 20rem) / (48 - 20)));line-height: calc( 1.4 * (2.05rem + (4 - 2.05) * ((100vw - 20rem) / (48 - 20))));}.display-4{font-size: 0.8rem;font-size: calc( 1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));line-height: calc( 1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));}.display-5{font-size: 1.8rem;font-size: calc( 1.4375rem + (2.25 - 1.4375) * ((100vw - 20rem) / (48 - 20)));line-height: calc( 1.4 * (1.4375rem + (2.25 - 1.4375) * ((100vw - 20rem) / (48 - 20))));}}.btn{padding: 1rem 2rem;border-radius: 0px;}.btn-sm{border-width: 1px;padding: 1rem 1rem;border-radius: 0px;}.btn-md{font-weight: 600;padding: 1rem 2rem;border-radius: 0px;}.bg-primary{background-color: #f9d5bd;}.bg-success{background-color: #c6e2ba;}.bg-info{background-color: #f5edf6;}.bg-warning{background-color: #7f7e7e;}.bg-danger{background-color: #fe8b8b;}.btn-primary,.btn-primary:active,.btn-primary.active{background-color: #f9d5bd;border-color: #f9d5bd;color: #a84c0f;}.btn-primary:hover,.btn-primary:focus,.btn-primary.focus{color: #a84c0f;background-color: #f3a877;border-color: #f3a877;}.btn-primary.disabled,.btn-primary:disabled{color: #a84c0f;background-color: #f3a877;border-color: #f3a877;}.btn-secondary,.btn-secondary:active,.btn-secondary.active{background-color: #bbe0e2;border-color: #bbe0e2;color: #2f6c6f;}.btn-secondary:hover,.btn-secondary:focus,.btn-secondary.focus{color: #2f6c6f;background-color: #85c8cb;border-color: #85c8cb;}.btn-secondary.disabled,.btn-secondary:disabled{color: #2f6c6f;background-color: #85c8cb;border-color: #85c8cb;}.btn-info,.btn-info:active,.btn-info.active{background-color: #f5edf6;border-color: #f5edf6;color: #904c98;}.btn-info:hover,.btn-info:focus,.btn-info.focus{color: #904c98;background-color: #d9badd;border-color: #d9badd;}.btn-info.disabled,.btn-info:disabled{color: #904c98;background-color: #d9badd;border-color: #d9badd;}.btn-success,.btn-success:active,.btn-success.active{background-color: #c6e2ba;border-color: #c6e2ba;color: #426f2e;}.btn-success:hover,.btn-success:focus,.btn-success.focus{color: #426f2e;background-color: #9acb84;border-color: #9acb84;}.btn-success.disabled,.btn-success:disabled{color: #426f2e;background-color: #9acb84;border-color: #9acb84;}.btn-warning,.btn-warning:active,.btn-warning.active{background-color: #7f7e7e;border-color: #7f7e7e;color: #ffffff;}.btn-warning:hover,.btn-warning:focus,.btn-warning.focus{color: #ffffff;background-color: #595858;border-color: #595858;}.btn-warning.disabled,.btn-warning:disabled{color: #ffffff;background-color: #595858;border-color: #595858;}.btn-danger,.btn-danger:active,.btn-danger.active{background-color: #fe8b8b;border-color: #fe8b8b;color: #ffffff;}.btn-danger:hover,.btn-danger:focus,.btn-danger.focus{color: #ffffff;background-color: #fd3f3f;border-color: #fd3f3f;}.btn-danger.disabled,.btn-danger:disabled{color: #ffffff;background-color: #fd3f3f;border-color: #fd3f3f;}.btn-black,.btn-black:active,.btn-black.active{background-color: #333333;border-color: #333333;color: #ffffff;}.btn-black:hover,.btn-black:focus,.btn-black.focus{color: #ffffff;background-color: #0d0d0d;border-color: #0d0d0d;}.btn-black.disabled,.btn-black:disabled{color: #ffffff;background-color: #0d0d0d;border-color: #0d0d0d;}.btn-white,.btn-white:active,.btn-white.active{background-color: #ffffff;border-color: #ffffff;color: #808080;}.btn-white:hover,.btn-white:focus,.btn-white.focus{color: #808080;background-color: #d9d9d9;border-color: #d9d9d9;}.btn-white.disabled,.btn-white:disabled{color: #808080;background-color: #d9d9d9;border-color: #d9d9d9;}.btn-white,.btn-white:active,.btn-white.active{color: #333333;}.btn-white:hover,.btn-white:focus,.btn-white.focus{color: #333333;}.btn-white.disabled,.btn-white:disabled{color: #333333;}.btn-primary-outline,.btn-primary-outline:active,.btn-primary-outline.active{background: none;border-color: #f19a60;color: #f19a60;}.btn-primary-outline:hover,.btn-primary-outline:focus,.btn-primary-outline.focus{color: #a84c0f;background-color: #f9d5bd;border-color: #f9d5bd;}.btn-primary-outline.disabled,.btn-primary-outline:disabled{color: #a84c0f;background-color: #f9d5bd;border-color: #f9d5bd;}.btn-secondary-outline,.btn-secondary-outline:active,.btn-secondary-outline.active{background: none;border-color: #73bfc4;color: #73bfc4;}.btn-secondary-outline:hover,.btn-secondary-outline:focus,.btn-secondary-outline.focus{color: #2f6c6f;background-color: #bbe0e2;border-color: #bbe0e2;}.btn-secondary-outline.disabled,.btn-secondary-outline:disabled{color: #2f6c6f;background-color: #bbe0e2;border-color: #bbe0e2;}.btn-info-outline,.btn-info-outline:active,.btn-info-outline.active{background: none;border-color: #cfa9d4;color: #cfa9d4;}.btn-info-outline:hover,.btn-info-outline:focus,.btn-info-outline.focus{color: #904c98;background-color: #f5edf6;border-color: #f5edf6;}.btn-info-outline.disabled,.btn-info-outline:disabled{color: #904c98;background-color: #f5edf6;border-color: #f5edf6;}.btn-success-outline,.btn-success-outline:active,.btn-success-outline.active{background: none;border-color: #8bc472;color: #8bc472;}.btn-success-outline:hover,.btn-success-outline:focus,.btn-success-outline.focus{color: #426f2e;background-color: #c6e2ba;border-color: #c6e2ba;}.btn-success-outline.disabled,.btn-success-outline:disabled{color: #426f2e;background-color: #c6e2ba;border-color: #c6e2ba;}.btn-warning-outline,.btn-warning-outline:active,.btn-warning-outline.active{background: none;border-color: #4c4b4b;color: #4c4b4b;}.btn-warning-outline:hover,.btn-warning-outline:focus,.btn-warning-outline.focus{color: #ffffff;background-color: #7f7e7e;border-color: #7f7e7e;}.btn-warning-outline.disabled,.btn-warning-outline:disabled{color: #ffffff;background-color: #7f7e7e;border-color: #7f7e7e;}.btn-danger-outline,.btn-danger-outline:active,.btn-danger-outline.active{background: none;border-color: #fd2626;color: #fd2626;}.btn-danger-outline:hover,.btn-danger-outline:focus,.btn-danger-outline.focus{color: #ffffff;background-color: #fe8b8b;border-color: #fe8b8b;}.btn-danger-outline.disabled,.btn-danger-outline:disabled{color: #ffffff;background-color: #fe8b8b;border-color: #fe8b8b;}.btn-black-outline,.btn-black-outline:active,.btn-black-outline.active{background: none;border-color: #000000;color: #000000;}.btn-black-outline:hover,.btn-black-outline:focus,.btn-black-outline.focus{color: #ffffff;background-color: #333333;border-color: #333333;}.btn-black-outline.disabled,.btn-black-outline:disabled{color: #ffffff;background-color: #333333;border-color: #333333;}.btn-white-outline,.btn-white-outline:active,.btn-white-outline.active{background: none;border-color: #ffffff;color: #ffffff;}.btn-white-outline:hover,.btn-white-outline:focus,.btn-white-outline.focus{color: #333333;background-color: #ffffff;border-color: #ffffff;}.text-primary{color: #f9d5bd;}.text-primary.btn-underline:after,.text-primary.btn-underline:before{background: #f9d5bd;}.text-secondary{color: #bbe0e2;}.text-secondary.btn-underline:after,.text-secondary.btn-underline:before{background: #bbe0e2;}.text-success{color: #c6e2ba;}.text-success.btn-underline:after,.text-success.btn-underline:before{background: #c6e2ba;}.text-info{color: #f5edf6;}.text-info.btn-underline:after,.text-info.btn-underline:before{background: #f5edf6;}.text-warning{color: #7f7e7e;}.text-warning.btn-underline:after,.text-warning.btn-underline:before{background: #7f7e7e;}.text-danger{color: #fe8b8b;}.text-danger.btn-underline:after,.text-danger.btn-underline:before{background: #fe8b8b;}.text-white{color: #ffffff;}.text-white.btn-underline:after,.text-white.btn-underline:before{background: #ffffff;}.text-black{color: #000000;}.text-black.btn-underline:after,.text-black.btn-underline:before{background: #000000;}a.text-primary:hover,a.text-primary:focus{color: #f19a60;}a.text-secondary:hover,a.text-secondary:focus{color: #73bfc4;}a.text-success:hover,a.text-success:focus{color: #8bc472;}a.text-info:hover,a.text-info:focus{color: #cfa9d4;}a.text-warning:hover,a.text-warning:focus{color: #4c4b4b;}a.text-danger:hover,a.text-danger:focus{color: #fd2626;}a.text-white:hover,a.text-white:focus{color: #b3b3b3;}a.text-black:hover,a.text-black:focus{color: #4d4d4d;}.alert-success{background-color: #c6e2ba;}.alert-info{background-color: #f5edf6;}.alert-warning{background-color: #7f7e7e;}.alert-danger{background-color: #fe8b8b;}a,a:hover{color: #f9d5bd;}.mbr-plan-header.bg-primary .mbr-plan-subtitle,.mbr-plan-header.bg-primary .mbr-plan-price-desc{color: #ffffff;}.mbr-plan-header.bg-success .mbr-plan-subtitle,.mbr-plan-header.bg-success .mbr-plan-price-desc{color: #ffffff;}.mbr-plan-header.bg-info .mbr-plan-subtitle,.mbr-plan-header.bg-info .mbr-plan-price-desc{color: #ffffff;}.mbr-plan-header.bg-warning .mbr-plan-subtitle,.mbr-plan-header.bg-warning .mbr-plan-price-desc{color: #bfbebe;}.mbr-plan-header.bg-danger .mbr-plan-subtitle,.mbr-plan-header.bg-danger .mbr-plan-price-desc{color: #ffffff;}div[submit-success]{background: #c6e2ba;padding: 1rem;margin-bottom: 1rem;}div[submit-error]{background: #fe8b8b;padding: 1rem;margin-bottom: 1rem;}.mobirise-spinner{position: absolute;top: 50%;left: 40%;margin-left: 10%;-webkit-transform: translate3d(-50%,-50%,0);z-index: 4;}.mobirise-spinner em{width: 24px;height: 24px;background: #3ac;border-radius: 100%;display: inline-block;-webkit-animation: slide 1s infinite;}.mobirise-spinner em:nth-child(1){-webkit-animation-delay: 0.1s;background: #f9d5bd;}.mobirise-spinner em:nth-child(2){-webkit-animation-delay: 0.2s;background: #bbe0e2;}.mobirise-spinner em:nth-child(3){-webkit-animation-delay: 0.3s;background: #c6e2ba;}@-moz-keyframes slide{0%{-webkit-transform: scale(1);}50%{opacity: 0.3;-webkit-transform: scale(2);}100%{-webkit-transform: scale(1);}}@-webkit-keyframes slide{0%{-webkit-transform: scale(1);}50%{opacity: 0.3;-webkit-transform: scale(2);}100%{-webkit-transform: scale(1);}}@-o-keyframes slide{0%{-webkit-transform: scale(1);}50%{opacity: 0.3;-webkit-transform: scale(2);}100%{-webkit-transform: scale(1);}}@keyframes slide{0%{-webkit-transform: scale(1);}50%{opacity: 0.3;-webkit-transform: scale(2);}100%{-webkit-transform: scale(1);}}.mobirise-loader .amp-active > div{display: none;}#scrollToTopMarker{display: none;}#scrollToTopButton{background-color: #f9d5bd;}#scrollToTopButton a:before{background: #000000;}#scrollToTopButton a:after{border-top-color: #000000;border-right-color: #000000;}.display-1 .mbr-iconfont-btn{font-size: 6rem;width: 6rem;}.display-2 .mbr-iconfont-btn{font-size: 4rem;width: 4rem;}.display-4 .mbr-iconfont-btn{font-size: 1rem;width: 1rem;}.display-5 .mbr-iconfont-btn{font-size: 2.25rem;width: 2.25rem;}.display-7 .mbr-iconfont-btn{font-size: 1.1rem;width: 1.1rem;}.cid-qOljoPM3LS amp-sidebar{min-width: 260px;z-index: 1050;background-color: #232323;}.cid-qOljoPM3LS amp-sidebar.open:after{content: '';position: absolute;top: 0;left: 0;bottom: 0;right: 0;background-color: red;}.cid-qOljoPM3LS .open{-webkit-transform: translateX(0%);transform: translateX(0%);display: block;}.cid-qOljoPM3LS .builder-sidebar{background-color: #232323;position: relative;min-height: 100vh;z-index: 1030;padding: 1rem 2rem;max-width: 20rem;}.cid-qOljoPM3LS .headerbar{display: flex;-webkit-justify-content: space-between;justify-content: space-between;padding: .5rem 1rem;min-height: 80px;-webkit-align-items: center;align-items: center;background: #232323;}.cid-qOljoPM3LS .headerbar.sticky-nav{position: fixed;z-index: 1000;width: 100%;}.cid-qOljoPM3LS .brand{display: flex;-webkit-align-items: center;align-items: center;padding-right: 30px;}.cid-qOljoPM3LS .brand p{margin: 0;padding: 0;}.cid-qOljoPM3LS .brand-name{color: #ffffff;}.cid-qOljoPM3LS .sidebar{padding: 1rem 0;margin: 0;}.cid-qOljoPM3LS .sidebar > li{list-style: none;display: flex;-webkit-flex-direction: column;flex-direction: column;}.cid-qOljoPM3LS .sidebar a{display: block;text-decoration: none;margin-bottom: 10px;}.cid-qOljoPM3LS .close-sidebar{width: 30px;height: 30px;position: relative;cursor: pointer;background-color: transparent;border: none;}.cid-qOljoPM3LS .close-sidebar:focus{outline: 2px auto #f9d5bd;}.cid-qOljoPM3LS .close-sidebar span{position: absolute;left: 0;width: 30px;height: 2px;border-right: 5px;background-color: #ffffff;}.cid-qOljoPM3LS .close-sidebar span:nth-child(1){-webkit-transform: rotate(45deg);transform: rotate(45deg);}.cid-qOljoPM3LS .close-sidebar span:nth-child(2){-webkit-transform: rotate(-45deg);transform: rotate(-45deg);}@media (min-width: 992px){.cid-qOljoPM3LS .brand-name{min-width: 8rem;}.cid-qOljoPM3LS .builder-sidebar{margin-left: auto;}.cid-qOljoPM3LS .builder-sidebar .sidebar li{-webkit-flex-direction: row;flex-direction: row;-webkit-flex-wrap: wrap;flex-wrap: wrap;}.cid-qOljoPM3LS .builder-sidebar .sidebar li a{padding: .5rem;margin: 0;}.cid-qOljoPM3LS .builder-overlay{display: none;}}.cid-qOljoPM3LS .hamburger{position: relative;right: 20px;margin-left: auto;width: 30px;height: 20px;background: none;border: none;cursor: pointer;z-index: 1000;}.cid-qOljoPM3LS .hamburger:focus{outline: none;}.cid-qOljoPM3LS .hamburger span{position: absolute;right: 0;width: 30px;height: 2px;border-right: 5px;background-color: #ffffff;}.cid-qOljoPM3LS .hamburger span:nth-child(1){top: 0;transition: all .2s;}.cid-qOljoPM3LS .hamburger span:nth-child(2){top: 8px;transition: all .15s;}.cid-qOljoPM3LS .hamburger span:nth-child(3){top: 8px;transition: all .15s;}.cid-qOljoPM3LS .hamburger span:nth-child(4){top: 16px;transition: all .2s;}.cid-qOljoPM3LS amp-img{margin-right: 1rem;display: flex;-webkit-align-items: center;align-items: center;width: 55px;}@media (max-width: 768px){.cid-qOljoPM3LS amp-img{max-height: 55px;max-width: 55px;}}.cid-qNAWIUyFHs{background-image: url("assets/images/22-1920x1281.jpg");}.cid-qNAWIUyFHs .mbr-overlay{background-color: #000000;opacity: 0.4;}.cid-qNAWIUyFHs .lightbox{background: rgba(0,0,0,0.8);width: 100%;height: 100%;position: absolute;display: flex;align-items: center;justify-content: center;}.cid-qNAWIUyFHs .video-block{width: 100%;}.cid-qNAWIUyFHs .amp-iconfont{font-size: 5rem;width: 5rem;color: #c6e2ba;}.cid-qNAWIUyFHs .icon-wrapper{margin: 1.5rem auto;display: inline-block;width: 5rem;height: 5rem;margin-bottom: .5rem;}.cid-qNAWIUyFHs .icon-sign{display: block;color: #d85757;}.cid-qNAWIUyFHs .mbr-section-title{color: #ffffff;}.cid-qNAWIUyFHs .icon-sign{color: #c6e2ba;}.cid-qNF8uRc7E7{padding-top: 75px;padding-bottom: 60px;background-color: #232323;}.cid-qNF8uRc7E7 .mbr-section-subtitle{padding: 0;margin: 0;color: #7f7e7e;}.cid-qNF8uRc7E7 .mbr-section-btn{padding-top: 1.5rem;}.cid-qNF8uRc7E7 .mbr-title{color: #c6e2ba;}.cid-qNB2exhgLl{padding-top: 0px;padding-bottom: 60px;background-color: #232323;}.cid-qNB2exhgLl .main-row{justify-content: center;align-items: flex-start;}.cid-qNB2exhgLl .mbr-text{color: #7f7e7e;margin-bottom: 0;padding: 0;}.cid-qNB2exhgLl .card-img{width: 100%;-webkit-flex-shrink: 0;flex-shrink: 0;padding-bottom: 2rem;}.cid-qNB2exhgLl .icon-wrap{width: 6rem;height: 6rem;display: inline-block;}.cid-qNB2exhgLl .card-box{word-break: break-word;width: 100%;}.cid-qNB2exhgLl .card-row{-webkit-flex-wrap: wrap;flex-wrap: wrap;display: flex;}.cid-qNB2exhgLl .amp-iconfont{font-size: 6rem;width: 6rem;color: #c6e2ba;}.cid-qNB2exhgLl .card-title{margin-bottom: 1rem;}@media (max-width: 991px){.cid-qNB2exhgLl .card-img{padding-bottom: 0.75rem;}.cid-qNB2exhgLl .card-box{padding-left: 0;}.cid-qNB2exhgLl .first-row-card{padding-bottom: 2rem;}}@media (max-width: 767px){.cid-qNB2exhgLl .amp-iconfont{font-size: 3rem;}.cid-qNB2exhgLl .card:not(.last-child){padding-bottom: 2rem;}}.cid-qNB2exhgLl .card-title,.cid-qNB2exhgLl .card-img{color: #ffffff;}.cid-qNB5y4QMBy{padding-top: 0px;padding-bottom: 75px;background-color: #232323;}.cid-qNB5y4QMBy .main-row{justify-content: center;align-items: flex-start;}.cid-qNB5y4QMBy .mbr-text{color: #7f7e7e;margin-bottom: 0;padding: 0;}.cid-qNB5y4QMBy .card-img{width: 100%;-webkit-flex-shrink: 0;flex-shrink: 0;padding-bottom: 2rem;}.cid-qNB5y4QMBy .icon-wrap{width: 6rem;height: 6rem;display: inline-block;}.cid-qNB5y4QMBy .card-box{word-break: break-word;width: 100%;}.cid-qNB5y4QMBy .card-row{flex-wrap: wrap;display: flex;}.cid-qNB5y4QMBy .amp-iconfont{font-size: 6rem;color: #c6e2ba;}.cid-qNB5y4QMBy .card-title{margin-bottom: 1rem;}@media (max-width: 991px){.cid-qNB5y4QMBy .card-img{padding-bottom: 0.75rem;}.cid-qNB5y4QMBy .card-box{padding-left: 0;}.cid-qNB5y4QMBy .first-row-card{padding-bottom: 2rem;}}@media (max-width: 767px){.cid-qNB5y4QMBy .amp-iconfont{font-size: 3rem;}.cid-qNB5y4QMBy .card:not(.last-child){padding-bottom: 2rem;}}.cid-qNB5y4QMBy .card-title,.cid-qNB5y4QMBy .card-img{color: #ffffff;text-align: center;}.cid-qNFcnjLfbc{padding-top: 75px;padding-bottom: 60px;background-color: #c6e2ba;}.cid-qNFcnjLfbc .mbr-section-subtitle{padding: 0;margin: 0;color: #7f7e7e;}.cid-qNFcnjLfbc .mbr-section-btn{padding-top: 1.5rem;}.cid-qNFjwU9wzC{padding-top: 0px;padding-bottom: 0px;background-color: #c6e2ba;}.cid-qNFjwU9wzC .mbr-row{align-items: center;}.cid-qNFjwU9wzC .image-block{display: flex;align-items: center;}.cid-qNFjwU9wzC .text-block{padding: 2rem;}.cid-qNFjwU9wzC amp-img{width: 100%;margin: 0 auto;text-align: center;}.cid-qNFjwU9wzC .mbr-text{padding-bottom: 0;margin-bottom: 0;}@media (max-width: 767px){.cid-qNFjwU9wzC .mbr-section-subtitle,.cid-qNFjwU9wzC .mbr-text{text-align: center;}.cid-qNFjwU9wzC .text-block{padding: 2rem 1rem;}}@media (min-width: 992px){.cid-qNFjwU9wzC .image-block{width: 50%;}}.cid-qNFjwU9wzC .mbr-text,.cid-qNFjwU9wzC .mbr-section-btn{color: #232323;}.cid-qNFjxns4aA{padding-top: 0px;padding-bottom: 0px;background-color: #c6e2ba;}.cid-qNFjxns4aA .mbr-row{align-items: center;}.cid-qNFjxns4aA .mbr-row{flex-direction: row-reverse;}.cid-qNFjxns4aA .image-block{display: flex;align-items: center;}.cid-qNFjxns4aA .text-block{padding: 2rem;}.cid-qNFjxns4aA amp-img{width: 100%;margin: 0 auto;text-align: center;}.cid-qNFjxns4aA .mbr-text{padding-bottom: 0;margin-bottom: 0;}@media (max-width: 767px){.cid-qNFjxns4aA .mbr-section-subtitle,.cid-qNFjxns4aA .mbr-text{text-align: center;}.cid-qNFjxns4aA .text-block{padding: 2rem 1rem;}}@media (min-width: 992px){.cid-qNFjxns4aA .image-block{width: 50%;}}.cid-qNFjxns4aA .mbr-text,.cid-qNFjxns4aA .mbr-section-btn{color: #232323;}.cid-qNFjxOr7ja{padding-top: 0px;padding-bottom: 0px;background-color: #c6e2ba;}.cid-qNFjxOr7ja .mbr-row{align-items: center;}.cid-qNFjxOr7ja .image-block{display: flex;align-items: center;}.cid-qNFjxOr7ja .text-block{padding: 2rem;}.cid-qNFjxOr7ja amp-img{width: 100%;margin: 0 auto;text-align: center;}.cid-qNFjxOr7ja .mbr-text{padding-bottom: 0;margin-bottom: 0;}@media (max-width: 767px){.cid-qNFjxOr7ja .mbr-section-subtitle,.cid-qNFjxOr7ja .mbr-text{text-align: center;}.cid-qNFjxOr7ja .text-block{padding: 2rem 1rem;}}@media (min-width: 992px){.cid-qNFjxOr7ja .image-block{width: 50%;}}.cid-qNFjxOr7ja .mbr-text,.cid-qNFjxOr7ja .mbr-section-btn{color: #232323;}.cid-qNFjygYnwG{padding-top: 0px;padding-bottom: 75px;background-color: #c6e2ba;}.cid-qNFjygYnwG .mbr-row{align-items: center;}.cid-qNFjygYnwG .mbr-row{flex-direction: row-reverse;}.cid-qNFjygYnwG .image-block{display: flex;align-items: center;}.cid-qNFjygYnwG .text-block{padding: 2rem;}.cid-qNFjygYnwG amp-img{width: 100%;margin: 0 auto;text-align: center;}.cid-qNFjygYnwG .mbr-text{padding-bottom: 0;margin-bottom: 0;}@media (max-width: 767px){.cid-qNFjygYnwG .mbr-section-subtitle,.cid-qNFjygYnwG .mbr-text{text-align: center;}.cid-qNFjygYnwG .text-block{padding: 2rem 1rem;}}@media (min-width: 992px){.cid-qNFjygYnwG .image-block{width: 50%;}}.cid-qNFjygYnwG .mbr-text,.cid-qNFjygYnwG .mbr-section-btn{color: #232323;}.cid-qNFuKOaOXv{padding-top: 75px;padding-bottom: 60px;background-color: #232323;}.cid-qNFuKOaOXv .mbr-section-subtitle{padding: 0;margin: 0;color: #7f7e7e;}.cid-qNFuKOaOXv .mbr-section-btn{padding-top: 1.5rem;}.cid-qNFuKOaOXv .mbr-title{color: #c6e2ba;}.cid-qNFuHmNXL2{padding-top: 0px;padding-bottom: 75px;background-color: #232323;}.cid-qNFuHmNXL2 .mbr-row{margin: 0 15px;}.cid-qNFuHmNXL2 .card{padding-right: 10px;padding-left: 10px;display: flex;-ms-flex-direction: column;flex-direction: column;min-width: 0;border-radius: 0;width: 100%;min-height: 1px;}.cid-qNFuHmNXL2 .card .card-wrapper{background: #c6e2ba;padding-top: 3rem;height: 100%;}@media (max-width: 991px){.cid-qNFuHmNXL2 .card .card-wrapper{padding-top: 1rem;}}.cid-qNFuHmNXL2 .card:hover .card-img{-webkit-filter: none;-moz-filter: none;-ms-filter: none;-o-filter: none;filter: none;transition: all .5s;}.cid-qNFuHmNXL2 .card-img amp-img{border-radius: 50%;width: 50%;margin: auto;}.cid-qNFuHmNXL2 .card-img amp-img img{border-radius: 50%;}.cid-qNFuHmNXL2 .card-title{margin: 0;padding-bottom: 0.5rem;color: #464646;}.cid-qNFuHmNXL2 .mbr-text{margin: 0;color: #232323;}.cid-qNFuHmNXL2 .card-subtitle{margin: 0;color: #464646;}.cid-qNFuHmNXL2 .card-box{padding: 2rem 2rem 3rem 2rem;}@media (max-width: 991px){.cid-qNFuHmNXL2 .card-box{padding: 1rem 2rem;}}@media (max-width: 991px){.cid-qNFuHmNXL2 .first-row-card{padding-bottom: 2rem;}}@media (max-width: 767px){.cid-qNFuHmNXL2 .card:not(.last-child){padding-bottom: 2rem;}}.cid-rc6AUaO33y{padding-top: 60px;padding-bottom: 60px;background-color: #c6e2ba;}.cid-rc6AUaO33y .carousel-img{width: 100%;text-align: center;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;}.cid-rc6AUaO33y .amp-carousel-button{width: 50px;height: 50px;border-radius: 50%;}.cid-rc6AUaO33y img.mbr-temp{width: auto;}.cid-rc6AUaO33y .mbr-section-title{padding-bottom: 2rem;}.cid-rc6AUaO33y amp-image-lightbox img{width: 100%;height: auto;}.cid-rc6AUaO33y amp-img{transition: all .5s;}.cid-rc6AUaO33y amp-img:hover{opacity: .3;cursor: pointer;}.cid-qNFqRIPaJ4{padding-top: 75px;padding-bottom: 75px;background: #232323;}.cid-qNFqRIPaJ4 .mbr-row{padding-top: 3rem;}.cid-qNFqRIPaJ4 .card-list-item{padding: .75rem 2rem;}.cid-qNFqRIPaJ4 .plan{background: none;}.cid-qNFqRIPaJ4 .plan .card-wrap{position: relative;}.cid-qNFqRIPaJ4 .plan .mbr-overlay{background: #c6e2ba;opacity: 0.7;}.cid-qNFqRIPaJ4 .plan .card-list{list-style: none;padding-left: 0;}.cid-qNFqRIPaJ4 .plan .card-list-item{border: 0;background: none;position: relative;}.cid-qNFqRIPaJ4 .plan .card-list-item::after{position: absolute;bottom: 0;left: 20%;width: 60%;height: 2px;content: "";background-color: #ffffff;}.cid-qNFqRIPaJ4 .plan .card-list-item:last-child::after{display: none;}.cid-qNFqRIPaJ4 .plan .mbr-section-btn a{margin-bottom: 0;}.cid-qNFqRIPaJ4 .plan .plan-body{padding-bottom: 3rem;position: relative;}.cid-qNFqRIPaJ4 .plan-header{padding: 3rem 2rem 2rem 2rem;position: relative;}@media (max-width: 767px){.cid-qNFqRIPaJ4 .plan:not(.last-child){margin-bottom: 1rem;}}@media (max-width: 991px){.cid-qNFqRIPaJ4 .first-row-card{margin-bottom: 1rem;}}.cid-qNFqRIPaJ4 .mbr-section-title{color: #c6e2ba;}.cid-qNFqRIPaJ4 .mbr-section-subtitle{color: #ffffff;}.cid-qNFqRIPaJ4 .plan-title{color: #ffffff;}.cid-qNFsM6TTdb{padding-top: 75px;padding-bottom: 75px;background-color: #c6e2ba;}.cid-qNFsM6TTdb .mbr-section-title{padding-bottom: 2rem;}.cid-qNFsM6TTdb label.input-label{display: flex;flex-direction: column;width: 100%;padding: .5rem;margin: 0;}.cid-qNFsM6TTdb label.area{padding: .5rem;width: 100%;}.cid-qNFsM6TTdb textarea{width: 100%;max-width: 100%;}.cid-qNFsM6TTdb .main-row{padding-top: .5rem;}.cid-qNFsM6TTdb .map-placeholder{display: none;}.cid-qNFsM6TTdb .map-placeholder h4{padding-top: 5rem;color: #767676;text-align: center;}.cid-qNFsM6TTdb .google-map{min-height: 25rem;position: relative;width: 100%;height: 100%;}.cid-qNFsM6TTdb .google-map iframe{height: 100%;width: 100%;}.cid-qNFsM6TTdb .google-map [data-state-details]{color: #6b6763;font-family: Montserrat;height: 1.5em;margin-top: -0.75em;padding-left: 1.25rem;padding-right: 1.25rem;position: absolute;text-align: center;top: 50%;width: 100%;}.cid-qNFsM6TTdb .google-map[data-state]{background: #e9e5dc;}.cid-qNFsM6TTdb .google-map[data-state="loading"] [data-state-details]{display: none;}@media (max-width: 991px){.cid-qNFsM6TTdb .form-content{padding-top: 2rem;}.cid-qNFsM6TTdb label.area{padding: .5rem 1rem;}}@media (max-width: 767px){.cid-qNFsM6TTdb label.area{padding: .5rem .5rem;}}.cid-qNFLWBPHSw{padding-top: 75px;padding-bottom: 75px;background-color: #232323;}.cid-qNFLWBPHSw .mbr-row{padding-top: 3rem;}.cid-qNFLWBPHSw .mbr-row.mbr-col-lg-10{margin: auto;}.cid-qNFLWBPHSw .card.lg-pb{padding-bottom: 2rem;}.cid-qNFLWBPHSw .card .card-wrapper{background-color: #c6e2ba;padding: 2rem;border-radius: 10px;}.cid-qNFLWBPHSw .card .triangle{width: 0;height: 0;border-top: 40px solid #c6e2ba;border-right: 30px solid transparent;margin-left: 18%;}.cid-qNFLWBPHSw .card .footer-wrap{padding-top: .5rem;}.cid-qNFLWBPHSw .card .footer-wrap{display: flex;align-items: center;}.cid-qNFLWBPHSw .card .footer-wrap .card-img{margin-right: 1rem;}@media (min-width: 768px){.cid-qNFLWBPHSw .card .footer-wrap .card-img{width: 4.5rem;}}.cid-qNFLWBPHSw .card .footer-wrap .card-img amp-img{border-radius: 50%;margin: auto;}.cid-qNFLWBPHSw .card .footer-wrap .card-img amp-img img{border-radius: 50%;}.cid-qNFLWBPHSw .card .footer-wrap .signature{width: 100%;}.cid-qNFLWBPHSw .card .footer-wrap .author-name{word-break: break-word;}.cid-qNFLWBPHSw .card .footer-wrap .author-title{word-break: break-word;}.cid-qNFLWBPHSw .mbr-text{padding: 0;margin: 0;color: #232323;}@media (max-width: 991px){.cid-qNFLWBPHSw .card.md-pb{padding-bottom: 2rem;}}@media (max-width: 767px){.cid-qNFLWBPHSw .author-name{text-align: left;}.cid-qNFLWBPHSw .author-title{text-align: left;}.cid-qNFLWBPHSw .card-img{width: 4rem;}.cid-qNFLWBPHSw .card{padding-bottom: 2rem;}.cid-qNFLWBPHSw .card .card-wrapper{padding: 1rem;}}.cid-qNFLWBPHSw .mbr-section-title{color: #c6e2ba;}.cid-qNFLWBPHSw .author-name{color: #c6e2ba;}.cid-qNFLWBPHSw .author-title{color: #ffffff;}.cid-qNFNaTfrgG{padding-top: 60px;padding-bottom: 60px;background-color: #c6e2ba;}.cid-qNFNaTfrgG .container-fluid{padding-left: 30px;padding-right: 30px;}.cid-qNFNaTfrgG form{display: flex;padding-top: 10px;}.cid-qNFNaTfrgG .mbr-section-btn{padding-left: 1rem;}.cid-qNFNaTfrgG .mbr-section-btn .btn{margin: 0;}.cid-qNFNaTfrgG input{height: 100%;color: white;background-color: transparent;border: 1px solid #989898;}.cid-qNFNaTfrgG .group-title{color: #232323;margin-bottom: 0;text-align: left;}.cid-qNFNaTfrgG .items{padding-right: 30px;padding-bottom: 30px;}.cid-qNFNaTfrgG .list-item{display: flex;align-items: center;padding-top: 15px;padding-bottom: 15px;border-bottom: 1px solid #cecece;}.cid-qNFNaTfrgG .mbr-iconfont{padding-right: 1rem;font-size: 0.6rem;color: #cecece;margin: auto;}.cid-qNFNaTfrgG .icon-wrap{width: 2rem;height: 2rem;}.cid-qNFNaTfrgG .amp-iconfont-social{font-size: 2rem;width: 2rem;color: #464646;}.cid-qNFNaTfrgG .amp-iconfont-social:hover{opacity: 0.7;}.cid-qNFNaTfrgG .icons-list a:not(:last-child){padding-right: 1rem;}.cid-qNFNaTfrgG .social-wrap{padding-top: 2rem;}.cid-qNFNaTfrgG h5{margin: 0;width: 100%;}.cid-qNFNaTfrgG .text{text-align: left;color: #464646;}@media (max-width: 991px){.cid-qNFNaTfrgG .social-wrap{padding-top: 0;}.cid-qNFNaTfrgG form{flex-direction: column;}.cid-qNFNaTfrgG .fieldset{justify-content: flex-start;}.cid-qNFNaTfrgG .mbr-section-btn{padding-left: 0;padding-top: 1rem;margin-left: 0;}}@media (min-width: 768px){.cid-qNFNaTfrgG .last-col{justify-content: center;}}@media (max-width: 767px){.cid-qNFNaTfrgG .container-fluid{padding: 0 1rem;}.cid-qNFNaTfrgG .mbr-section-btn{text-align: left;}.cid-qNFNaTfrgG .social-wrap{padding-top: 2rem;}}
+.engine{position: absolute;text-indent: -2400px;text-align: center;padding: 0;top: 0;left: -2400px;}[class*="-iconfont"]{display: inline-flex;}</style>
+ 
+  <script async  src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  <script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>
+  <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+  <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
+  
+  
+</head>
+<body><amp-sidebar id="sidebar" class="cid-qOljoPM3LS" layout="nodisplay" side="right">
+        <div class="builder-sidebar" id="builder-sidebar">
+            <button on="tap:sidebar.close" class="close-sidebar">
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="sidebar mbr-white" data-app-modern-menu="true"><a class="text-white display-7" href="demo-page1.html">Interior Design Example</a> <a class="text-white display-7" href="demo-page2.html">Dance School Example</a> <a class="text-white display-7" href="demo-page3.html">Riding School Example</a> <a class="text-white display-7" href="index.html#youtube2-4">Watch Video</a> 
+              <a class="text-white display-7" href="menu1.html">Menus</a> <a class="text-white display-7" href="headers.html">Headers</a> <a class="text-white display-7" href="images-and-videos.html">Images &amp; Videos</a> <a class="text-white display-7" href="carousels-and-sliders.html">Carousels &amp; Sliders</a> <a class="text-white display-7" href="lightbox-images.html">Lightbox Images</a> <a class="text-white display-7" href="features.html">Features</a> <a class="text-white display-7" href="content.html">Content</a> <a class="text-white display-7" href="progress-and-timeline.html">Progress Bars &amp; Timeline</a> <a class="text-white display-7" href="testimonials.html">Testimonials</a> <a class="text-white display-7" href="pricing-tables.html">Pricing Tables</a> <a class="text-white display-7" href="contacts-and-social.html">Contacts &amp; Social</a> <a class="text-white display-7" href="maps.html">Maps</a> <a class="text-white display-7" href="forms.html">Forms</a> <a class="text-white display-7" href="toggles-and-accordions.html">Toggles &amp; Accordions</a> <a class="text-white display-7" href="tables.html">Tables</a> <a class="text-white display-7" href="footers.html">Footers</a></div>
+            
+            <div class="navbar-buttons mbr-section-btn align-center"><a class="btn btn-sm btn-secondary display-4" href="http://my.mobirise.com/buy.php?p=34">Buy Now</a></div>
+        </div>
+    </amp-sidebar>
+
+<!-- Google Analytics -->
+<amp-analytics type="googleanalytics" id="analytics1">
+<script type="application/json">
+{
+  "vars": {
+    "account": "UA-63126154-1"
+  },
+  "triggers": {
+    "trackPageview": {
+      "on": "visible",
+      "request": "pageview"
+    }
+  }
+}
+</script>
+</amp-analytics>
+<!-- /Google Analytics -->
+
+
+  <section class="menu cid-qOljoPM3LS" id="menu2-gf">
+    
+    <nav class="headerbar sticky-nav">
+      <div class="brand">
+          <span class="brand-logo">
+              <amp-img src="assets/images/logo1-132x130.png" layout="responsive" width="54.83076923076923" height="54" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                  <a href="index.html"></a>
+              </amp-img>
+          </span>
+          <p class="brand-name mbr-fonts-style display-4"><a href="index.html" class="text-white">LightAMP</a></p>
+      </div>
+        <button on="tap:sidebar.toggle" class="ampstart-btn hamburger sticky-but">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    </nav>
+    
+    
+</section>
+
+<section class="header8 popup-video cid-qNAWIUyFHs mbr-fullscreen" id="header8-9h">
+
+    
+    <div class="mbr-overlay"></div>
+    <div class="container">    
+        <h1 class="mbr-section-title mbr-fonts-style align-center mbr-black l-spacing3 display-1">Learn To Dance<br>In 2 Months</h1>
+        
+        
+
+        <amp-lightbox id="my-lightbox" layout="nodisplay">
+          <div class="lightbox" on="tap:my-lightbox.close" role="button" tabindex="0">
+            <div class="container">
+                <div class="video-block"><amp-vimeo width="16" height="9" layout="responsive" data-videoid="92598159"></amp-vimeo>
+                    
+                </div>
+            </div>
+          </div>
+        </amp-lightbox>
+        
+        <div class="btn-wrap align-center">
+             <!-- mbr-icon -->
+            <span class="icon-wrapper">
+                <span class="popup-btn amp-iconfont fa-play-circle fa" on="tap:my-lightbox" role="button" tabindex="0"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm384 823q32-18 32-55t-32-55l-544-320q-31-19-64-1-32 19-32 56v640q0 37 32 56 16 8 32 8 17 0 32-9z"></path></svg></span>
+            </span>
+            <span class="icon-sign mbr-fonts-style mbr-white display-4">
+                Watch Video
+            </span>
+        </div>
+        
+    </div>
+</section>
+
+<section class="mbr-section content1 cid-qNF8uRc7E7" id="content1-9r">
+
+    
+
+    
+    <div class="container">
+        <h2 class="mbr-title align-center mbr-fonts-style display-2">Why Choose Our School</h2>
+        
+        
+    </div>
+</section>
+
+<section class="features7 cid-qNB2exhgLl" id="features7-9j">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row main-row">
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 first-row-card">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                            <span class="amp-iconfont fa-lock fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M640 768h512v-192q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-192q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            100% Result Guarantee</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 first-row-card">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                        <span class="amp-iconfont fa-trophy fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M522 883q-74-162-74-371h-256v96q0 78 94.5 162t235.5 113zm1078-275v-96h-256q0 209-74 371 141-29 235.5-113t94.5-162zm128-128v128q0 71-41.5 143t-112 130-173 97.5-215.5 44.5q-42 54-95 95-38 34-52.5 72.5t-14.5 89.5q0 54 30.5 91t97.5 37q75 0 133.5 45.5t58.5 114.5v64q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-64q0-69 58.5-114.5t133.5-45.5q67 0 97.5-37t30.5-91q0-51-14.5-89.5t-52.5-72.5q-53-41-95-95-113-5-215.5-44.5t-173-97.5-112-130-41.5-143v-128q0-40 28-68t68-28h288v-96q0-66 47-113t113-47h576q66 0 113 47t47 113v96h288q40 0 68 28t28 68z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            Famous Trainers</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 last-child">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                        <span class="amp-iconfont fa-line-chart fa"><svg width="100%" height="100%" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M2048 1536v128h-2048v-1536h128v1408h1920zm-128-1248v435q0 21-19.5 29.5t-35.5-7.5l-121-121-633 633q-10 10-23 10t-23-10l-233-233-416 416-192-192 585-585q10-10 23-10t23 10l233 233 464-464-121-121q-16-16-7.5-35.5t29.5-19.5h435q14 0 23 9t9 23z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            3 Years Of Experience</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+<section class="features7 cid-qNB5y4QMBy" id="features7-9k">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row main-row">
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 first-row-card">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                        <span class="amp-iconfont fa-smile-o fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            1000+ Happy Clients</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 first-row-card">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                        <span class="amp-iconfont fa-calendar fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            Flexible Timetable</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-12 mbr-col-md-6 mbr-col-lg-4 last-child">
+                <div class="card-row">
+                    <div class="card-img align-center">
+                        <div class="icon-wrap">
+                        <span class="amp-iconfont fa-map-marker fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1152 640q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm256 0q0 109-33 179l-364 774q-16 33-47.5 52t-67.5 19-67.5-19-46.5-52l-365-774q-33-70-33-179 0-212 150-362t362-150 362 150 150 362z"></path></svg></span>
+                        </div>
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style align-center display-5">
+                            Comfortable Location</h4>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section content1 cid-qNFcnjLfbc" id="content1-9v">
+
+    
+
+    
+    <div class="container">
+        <h2 class="mbr-title align-center mbr-fonts-style display-2">
+            Choose Your Dance Style</h2>
+        
+        
+    </div>
+</section>
+
+<section class="features14 cid-qNFjwU9wzC" id="features14-9y">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row mbr-justify-content-center main-row">
+            <div class="image-block">
+                <amp-img src="assets/images/contemporary-771x528.jpg" layout="responsive" width="569.4886363636364" height="390" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                    
+                </amp-img>
+            </div>
+            <div class="text-block mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6">
+                
+                <h3 class="mbr-section-subtitle mbr-fonts-style align-left display-5">
+                    Contemporary Dance</h3>
+                <p class="mbr-fonts-style mbr-text align-left display-7">
+                   We can especially recommend this dance school template to dancers and true artists. Customization capabilities of this AMP dancing template are unmatched in terms of both depth and intuitiveness.
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features14 cid-qNFjxns4aA" id="features14-9z">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row mbr-justify-content-center main-row">
+            <div class="image-block">
+                <amp-img src="assets/images/ballet-771x512.jpg" layout="responsive" width="570.720703125" height="379" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                    
+                </amp-img>
+            </div>
+            <div class="text-block mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6">
+                
+                <h3 class="mbr-section-subtitle mbr-fonts-style align-left display-5">
+                    Ballet</h3>
+                <p class="mbr-fonts-style mbr-text align-left display-7">
+                   It is an aesthetically clean and minimalist, highly professional and graphically refined and polished, very well structured and intuitively navigable, user and developer friendly, lightweight and extremely modern, search engine optimized and notoriously bold and communicative, visually stimulating responsive multi-concept dance studio template.
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features14 cid-qNFjxOr7ja" id="features14-a0">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row mbr-justify-content-center main-row">
+            <div class="image-block">
+                <amp-img src="assets/images/pole-771x511.jpg" layout="responsive" width="570.3287671232877" height="378" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                    
+                </amp-img>
+            </div>
+            <div class="text-block mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6">
+                
+                <h3 class="mbr-section-subtitle mbr-fonts-style align-left display-5">
+                    Pole Dance</h3>
+                <p class="mbr-fonts-style mbr-text align-left display-7">
+                   All of us know that Internet is a great place to spread the information. If you want to improve your dancing school business then it is important for you to take a look at this awesome dance studio template.
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features14 cid-qNFjygYnwG" id="features14-a1">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row mbr-justify-content-center main-row">
+            <div class="image-block">
+                <amp-img src="assets/images/hip-hop-771x514.jpg" layout="responsive" width="570" height="380" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                    
+                </amp-img>
+            </div>
+            <div class="text-block mbr-col-sm-12 mbr-col-md-12 mbr-col-lg-6">
+                
+                <h3 class="mbr-section-subtitle mbr-fonts-style align-left display-5">
+                    Hip-Hop</h3>
+                <p class="mbr-fonts-style mbr-text align-left display-7">
+                   AMP dancing template is simple for customization and usage. This theme using modern AMP technology. Dancing template is designed to satisfy the latest website requirements. It helps you to effectively manage the website speed in small screen mobile devices.
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section content1 cid-qNFuKOaOXv" id="content1-a8">
+
+    
+
+    
+    <div class="container">
+        <h2 class="mbr-title align-center mbr-fonts-style display-2">
+            Meet Our Instructors</h2>
+        
+        
+    </div>
+</section>
+
+<section class="features9 mbr-section cid-qNFuHmNXL2" id="features9-a7">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-row mbr-justify-content-center">
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3 first-row-card">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face1-250x250.jpg" layout="responsive" width="125" height="125" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div>
+                            </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="card-box">
+                        <p class="mbr-text mbr-fonts-style align-center display-7">
+                            Presented here dance school template effectively handles any type of information. This dance studio template uses responsive and mobile-friendly elements. It is a flat style bootstrap compatible theme. AMP dancing template follows the typical design aesthetics you required in a news website.
+                        </p>
+                        <h3 class="card-title mbr-fonts-style align-center display-6">
+                            Adam Smith
+                        </h3>
+                        <h4 class="mbr-fonts-style card-subtitle align-center display-4">
+                            Contemporary Dance</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3 first-row-card">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face2-250x250.jpg" layout="responsive" height="125" width="125" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div>
+                            </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="card-box">
+                        <p class="mbr-text mbr-fonts-style align-center display-7">
+                            It provides you different types of options and media layout varities. You will also get custom post type for the gallery and video posts. With the marked list, you can easily point the most important details on your dance school template. With clean white background, the image and the texts look clean and easy to read. Any number of articles can be set up easily on this studio template.
+                        </p>
+                        <h3 class="card-title mbr-fonts-style align-center display-6">
+                            Amanda Adams
+                        </h3>
+                        <h4 class="mbr-fonts-style card-subtitle align-center display-4">
+                            Ballet</h4>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face3-250x250.jpg" layout="responsive" height="125" width="125" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div>
+                            </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="card-box">
+                        <p class="mbr-text mbr-fonts-style align-center display-7">
+                            Check out the best AMP dancing template designed and build to represent a wonderful school of yours in an attractive and professional way.
+                        </p>
+                        <h3 class="card-title mbr-fonts-style align-center display-6">
+                            Adam Smith
+                        </h3>
+                        <h4 class="mbr-fonts-style card-subtitle align-center display-4">
+                            Hip-Hop</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3 last-child">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face4-250x250.jpg" layout="responsive" height="125" width="125" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div>
+                            </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="card-box">
+                        <p class="mbr-text mbr-fonts-style align-center display-7">
+                            Everyone should be able to find the elements that suits their needs.
+                        </p>
+                        <h3 class="card-title mbr-fonts-style align-center display-6">
+                            Adam Smith
+                        </h3>
+                        <h4 class="mbr-fonts-style card-subtitle align-center display-4">Pole Dance</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slider1 slider cid-rc6AUaO33y" id="slider1-jo">
+
+    
+    
+    
+    <div class="container">
+        <h2 class="mbr-section-title align-center mbr-fonts-style mbr-black display-2">Photo Gallery</h2>
+        
+        <div class="slider-box" data-autoplay="true" data-delay="3000"><amp-carousel class="carousel" height="9" width="16" layout="responsive" type="slides" loop="" autoplay="" delay="3000"><amp-img class="carousel-img mobirise-loader image-without-link" src="assets/images/6-1300x867.jpg" on="tap:lightbox1" role="button" tabindex="0" height="9" width="13.494809688581315" layout="responsive" alt="Dancing school theme">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img><amp-img class="assets/images/3-1300x867.jpg" on="tap:lightbox2" role="button" tabindex="0" height="9" width="13.494809688581315" layout="responsive" alt="Dancing school theme" src="assets/images/3-1300x867.jpg">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img><amp-img class="assets/images/1-1300x867.jpg" on="tap:lightbox3" role="button" tabindex="0" height="9" width="13.494809688581315" layout="responsive" alt="Dancing school theme" src="assets/images/1-1300x867.jpg">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img><amp-img class="carousel-img mobirise-loader image-without-link" src="assets/images/2-1300x861.jpg" on="tap:lightbox4" role="button" tabindex="0" height="9" width="13.588850174216027" layout="responsive" alt="Dancing school theme">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img><amp-img class="carousel-img mobirise-loader image-without-link" src="assets/images/5-1300x861.jpg" on="tap:lightbox5" role="button" tabindex="0" height="9" width="13.588850174216027" layout="responsive" alt="Dancing school theme">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img><amp-img class="carousel-img mobirise-loader image-without-link" src="assets/images/4-1300x861.jpg" on="tap:lightbox6" role="button" tabindex="0" height="9" width="13.588850174216027" layout="responsive" alt="Dancing school theme">
+                    <div placeholder="" class="placeholder">
+                                <div class="mobirise-spinner">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </div></div>
+                    
+                </amp-img></amp-carousel>
+            
+        </div>
+    </div>
+    <amp-image-lightbox id="lightbox1" layout="nodisplay"></amp-image-lightbox>
+    <amp-image-lightbox id="lightbox2" layout="nodisplay"></amp-image-lightbox>
+    <amp-image-lightbox id="lightbox3" layout="nodisplay"></amp-image-lightbox>
+    <amp-image-lightbox id="lightbox4" layout="nodisplay"></amp-image-lightbox>
+    <amp-image-lightbox id="lightbox5" layout="nodisplay"></amp-image-lightbox>
+    <amp-image-lightbox id="lightbox6" layout="nodisplay"></amp-image-lightbox>
+ </section>
+
+<section class="pricing-tables1 cid-qNFqRIPaJ4" id="pricing-tables1-a4">
+
+    
+
+    
+    <div class="container align-center">
+        <h2 class="mbr-section-title mbr-fonts-style display-2">
+            Pricing Tables
+        </h2>
+        
+        <div class="mbr-row mbr-justify-content-center mbr-white">
+            <div class="plan mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3 mbr-justify-content-center first-row-card">
+                <div class="card-wrap">
+                    <div class="mbr-overlay"></div>
+                    <div class="plan-header">
+                        <h3 class="plan-title mbr-fonts-style display-5">
+                            Light</h3>
+                        <div class="plan-price">
+                            <span class="price-value mbr-fonts-style display-2">
+                                $
+                            </span>
+                            <span class="price-figure mbr-fonts-style display-2">
+                                119</span>
+                            <div class="price-term mbr-fonts-style display-7">
+                                per month</div>
+                        </div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="plan-list">
+                            <ul class="card-list mbr-fonts-style display-7">
+                                <li class="card-list-item mbr-white">
+                                    1 Individual Class</li>
+                                <li class="card-list-item mbr-white">
+                                    1 Dance Style</li>
+                                <li class="card-list-item mbr-white">
+                                    2 Days / Week</li>
+                            </ul>
+                        </div>
+                        <div class="mbr-section-btn"><a href="https://mobirise.com" class="btn btn-success display-4">Book Now</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plan mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-3 mbr-justify-content-center first-row-card">
+                <div class="card-wrap">
+                    <div class="mbr-overlay"></div>
+                    <div class="plan-header">
+                        <h3 class="plan-title mbr-fonts-style display-5">
+                            Standart</h3>
+                        <div class="plan-price">
+                            <span class="price-value mbr-fonts-style display-2">
+                                $
+                            </span>
+                            <span class="price-figure mbr-fonts-style display-2">
+                                219</span>
+                            <div class="price-term mbr-fonts-style display-7">
+                                per month</div>
+                        </div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="plan-list">
+                            <ul class="card-list mbr-fonts-style display-7">
+                                <li class="card-list-item mbr-white">
+                                    2 Individual Classes</li>
+                                <li class="card-list-item mbr-white">2 Dance Styles</li>
+                                <li class="card-list-item mbr-white">
+                                    3 Days / Week</li>
+                            </ul>
+                        </div>
+                        <div class="mbr-section-btn"><a href="https://mobirise.com" class="btn btn-success display-4">Book Now</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plan mbr-col-sm-12 mbr-col-md-6 mbr-justify-content-center mbr-col-lg-3 last-child">
+                <div class="card-wrap">
+                    <div class="mbr-overlay"></div>
+                    <div class="plan-header">
+                        <h3 class="plan-title mbr-fonts-style display-5">
+                            Premium
+                        </h3>
+                        <div class="plan-price">
+                            <span class="price-value mbr-fonts-style display-2">
+                                $
+                            </span>
+                            <span class="price-figure mbr-fonts-style display-2">319</span>
+                            <div class="price-term mbr-fonts-style display-7">
+                                per month</div>
+                        </div>
+                    </div>
+                    <div class="plan-body">
+                        <div class="plan-list">
+                            <ul class="card-list mbr-fonts-style display-7">
+                                <li class="card-list-item mbr-white">
+                                    5 Individual Classes</li>
+                                <li class="card-list-item mbr-white">
+                                    All Dance Styles</li>
+                                <li class="card-list-item mbr-white">
+                                    Any Day</li><li class="card-list-item mbr-white">Nutritionist Consultation</li>
+                            </ul>
+                        </div>
+                        <div class="mbr-section-btn"><a href="https://mobirise.com" class="btn btn-success display-4">Book Now</a></div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+</section>
+
+<section class="form1 map cid-qNFsM6TTdb" id="form3-a5">
+
+    
+
+    
+    <div class="container">
+        <h2 class="align-center mbr-fonts-style mbr-section-title display-2">Get invitation for your
+<br>Free First Dance Class</h2>
+        
+
+        <div class="mbr-row mbr-justify-content-center main-row">
+            <div class="mbr-col-lg-8 mbr-col-md-12">
+                <div class="google-map"><amp-iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU&amp;q=place_id:ChIJn6wOs6lZwokRLKy1iqRcoKw" height="400" layout="fill" sandbox="allow-scripts allow-same-origin                                 allow-popups" frameborder="0" class="mobirise-loader">
+                    <div placeholder="">
+                        <div class="mobirise-spinner">
+                            <em></em>
+                            <em></em>
+                            <em></em>
+                        </div>
+                    </div>
+                </amp-iframe></div>
+                
+            </div>
+            
+            <div class="mbr-col-lg-4 mbr-col-md-12 form-content" data-form-type="formoid">
+                <div class="mbr-row">
+                    <div class="mbr-col-lg-12 mbr-col-md-12" data-form-type="formoid">
+                        <form class="mbr-form" method="post" target="_top" action-xhr="https://formoid.net/api/amp-form/push" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="Rv15jlbyhFMF65kSzkV1WHzbHg1i8xvTof0QJNJm35Cr5ZnsBwgYjuBSVzoxo7wIEkjgMduu7eF7I0watCoQ1HLU/9WYzKrn1mvqlIXA7bSKnB+42xYNvB+QlndSh87G">
+                            <div submit-success="">
+                                <template data-form-alert="" type="amp-mustache">Subscription successful!</template>
+                            </div>
+                            <div submit-error="">
+                                <template data-form-alert="" type="amp-mustache">Failed! {{error}}</template>
+                            </div>
+                            <div class="fieldset">
+                                <label class="input-label">
+                                    <input type="hidden" name="form[data][0][0]" value="Name" id="form[data][1][0]-form3-a5" data-form-field="">
+                                    <input type="text" name="form[data][0][1]" data-form-field="Name" placeholder="Name" required="" id="form[data][1][1]-form3-a5">
+                                </label>
+                                <label class="input-label">
+                                    <input type="hidden" name="form[data][1][0]" value="Phone" id="form[data][2][0]-form3-a5" data-form-field="">
+                                    <input type="phone" name="form[data][1][1]" data-form-field="Phone" placeholder="Phone" required="" id="form[data][2][1]-form3-a5">
+                                </label>
+                                <label class="input-label">
+                                    <input type="hidden" name="form[data][2][0]" value="Email" id="form[data][0][0]-form3-a5" data-form-field="">
+                                    <input type="email" name="form[data][2][1]" data-form-field="Email" placeholder="Email" required="" id="form[data][0][1]-form3-a5">
+                                </label>
+
+                                <label class="area">
+                                    <input type="hidden" name="form[data][3][0]" value="Message" id="form[data][3][0]-form3-a5" data-form-field="">
+                                    <textarea name="form[data][3][1]" rows="4" data-form-field="Message" placeholder="Message" id="form[data][3][1]-form3-a5"></textarea>
+                                </label>
+
+                                <span class="input-group-btn"><button type="submit" class="btn btn-form btn-black-outline display-4">Get Free Invitation!</button></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials2 cid-qNFLWBPHSw" id="testimonials2-ab">
+
+    
+
+    
+    <div class="container align-center">
+        <h2 class="mbr-section-title mbr-fonts-style display-2">
+            What Our Students Say
+        </h2>
+        
+        <div class="mbr-row mbr-justify-content-center align-left">
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-4 md-pb">
+                <div class="card-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Try dance studio template right now!
+                    </p>
+                </div>
+                <div class="triangle"></div>
+                <div class="footer-wrap">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face1-144x144.jpg" layout="responsive" width="72" height="72" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="signature">
+                        <div class="author-name mbr-fonts-style display-6">
+                            John Smith
+                        </div>
+                        <div class="author-title mbr-fonts-style mbr-light display-4">19, Student</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-4 md-pb">
+                <div class="card-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Do not hesitate to examine the best dance school template which actually can be changed for any kind of website. Developing an app for your company may be a bit hard than making a website. But the latest website development helps the sites to load almost like an app with a mobile-friendly user interface. If you are on a tight budget, you can use this dance studio template to make an incredible news website.
+                    </p>
+                </div>
+                <div class="triangle"></div>
+                <div class="footer-wrap">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face2-144x144.jpg" layout="responsive" width="72" height="72" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="signature">
+                        <div class="author-name mbr-fonts-style display-6">
+                            Jeanna Schmal</div>
+                        <div class="author-title mbr-fonts-style mbr-light display-4">25, Designer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mbr-col-sm-12 mbr-col-md-6 mbr-col-lg-4">
+                <div class="card-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        This AMP dancing template is a professional looking tool for your websites. It follows modern design layout. It is a theme with all the necessary pages you need for building a professional website. It has a great assortment of design elements and HTML features.
+                    </p>
+                </div>
+                <div class="triangle"></div>
+                <div class="footer-wrap">
+                    <div class="card-img">
+                        <amp-img src="assets/images/face3-144x144.jpg" layout="responsive" width="72" height="72" alt="Dancing school theme" class="mobirise-loader">
+                            <div placeholder="">
+                    <div class="mobirise-spinner">
+                        <em></em>
+                        <em></em>
+                        <em></em>
+                    </div>
+                </div>
+                            
+                        </amp-img>
+                    </div>
+                    <div class="signature">
+                        <div class="author-name mbr-fonts-style display-6">
+                            John Smith
+                        </div>
+                        <div class="author-title mbr-fonts-style mbr-light display-4">
+                            30, Teacher</div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+</section>
+
+<section class="footer5 cid-qNFNaTfrgG" id="footer5-ad">
+
+    
+    
+    <div class="container-fluid">
+        <div class="mbr-row mbr-justify-content-center main-row">
+
+            
+
+            <div class="mbr-col-lg-3 mbr-col-md-6 mbr-col-sm-12">
+                <h3 class="mbr-text mbr-bold mbr-fonts-style group-title display-5">
+                    Contacts
+                </h3>
+                <p class="mbr-text mbr-white text mbr-fonts-style display-7">
+                    Email: support@mobirise.com
+                    <br>Phone: +1 (0) 000 0000 001
+                </p>
+                <h3 class="mbr-text mbr-bold mbr-fonts-style group-title display-5">
+                    Address
+                </h3>
+                <p class="mbr-text text mbr-fonts-style display-7">
+                    1234 Street Name
+                    <br>City, AA 99999
+                </p>
+            </div>
+
+            <div class="mbr-col-lg-4 mbr-col-md-12 mbr-col-sm-12" data-form-type="formoid">
+                <div class="mbr-row last-col">
+                    <div class="form-wrap mbr-col-lg-12 mbr-col-md-6" data-form-type="formoid">
+                        <h3 class="mbr-text mbr-bold mbr-fonts-style group-title display-5">Subscribe To Our Newsletter
+                        </h3>
+                        <form class="mbr-form" method="post" target="_top" action-xhr="https://formoid.net/api/amp-form/push" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="iKbCGXF+4JDfS8vP0HTiSZxN0QTbgxrtQE68GD9qEIlUfm9LALCD+sQqSRVrdUY/wg5mmZEkT1+FYkv/9xZ7ikJn1LFi6jSfltlJraITpzaxa1Y5HTRKvHX4mAbtPoUh">
+                            <div submit-success="">
+                                <template data-form-alert="" type="amp-mustache">Subscription successful!</template>
+                            </div>
+                            <div submit-error="">
+                                <template data-form-alert="" type="amp-mustache">Failed! {{error}}</template>
+                            </div>
+                            <div class="fieldset">
+                        
+                                <input type="hidden" name="form[data][0][0]" value="Email" id="form[data][0][0]-footer5-ad" data-form-field="">
+                                <input class="input-label" type="email" name="form[data][0][1]" data-form-field="Email" placeholder="Email" required="" id="form[data][0][1]-footer5-ad">
+                        
+                            </div>
+                            <div class="mbr-section-btn"><button type="submit" class="btn btn-black-outline display-4">SUBSCRIBE</button></div>
+                        </form>
+                    </div>
+                    <div class="social-wrap mbr-col-lg-12 mbr-col-md-6">
+                        <h3 class="mbr-text mbr-bold mbr-fonts-style group-title display-5">
+                            Follow Us
+                        </h3>
+                        <div class="icons-list">
+                            
+                            
+                            
+                            
+                            
+                        <a href="http://www.youtube.com/channel/UCt_tncVAetpK5JeM8L-8jyw" target="_blank" class="icon-wrap">
+                                <span class="amp-iconfont-social amp-iconfont fa-youtube fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1099 1244v211q0 67-39 67-23 0-45-22v-301q22-22 45-22 39 0 39 67zm338 1v46h-90v-46q0-68 45-68t45 68zm-966-218h107v-94h-312v94h105v569h100v-569zm288 569h89v-494h-89v378q-30 42-57 42-18 0-21-21-1-3-1-35v-364h-89v391q0 49 8 73 12 37 58 37 48 0 102-61v54zm429-148v-197q0-73-9-99-17-56-71-56-50 0-93 54v-217h-89v663h89v-48q45 55 93 55 54 0 71-55 9-27 9-100zm338-10v-13h-91q0 51-2 61-7 36-40 36-46 0-46-69v-87h179v-103q0-79-27-116-39-51-106-51-68 0-107 51-28 37-28 116v173q0 79 29 116 39 51 108 51 72 0 108-53 18-27 21-54 2-9 2-58zm-608-913v-210q0-69-43-69t-43 69v210q0 70 43 70t43-70zm719 751q0 234-26 350-14 59-58 99t-102 46q-184 21-555 21t-555-21q-58-6-102.5-46t-57.5-99q-26-112-26-350 0-234 26-350 14-59 58-99t103-47q183-20 554-20t555 20q58 7 102.5 47t57.5 99q26 112 26 350zm-998-1276h102l-121 399v271h-100v-271q-14-74-61-212-37-103-65-187h106l71 263zm370 333v175q0 81-28 118-38 51-106 51-67 0-105-51-28-38-28-118v-175q0-80 28-117 38-51 105-51 68 0 106 51 28 37 28 117zm335-162v499h-91v-55q-53 62-103 62-46 0-59-37-8-24-8-75v-394h91v367q0 33 1 35 3 22 21 22 27 0 57-43v-381h91z"></path></svg></span>
+                            </a><a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank" class="icon-wrap">
+                                <span class="amp-iconfont-social amp-iconfont fa-facebook-square fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1376 128q119 0 203.5 84.5t84.5 203.5v960q0 119-84.5 203.5t-203.5 84.5h-188v-595h199l30-232h-229v-148q0-56 23.5-84t91.5-28l122-1v-207q-63-9-178-9-136 0-217.5 80t-81.5 226v171h-200v232h200v595h-532q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960z"></path></svg></span>
+                            </a><a href="https://www.twitter.com/mobirise" target="_blank" class="icon-wrap">
+                                <span class="amp-iconfont-social amp-iconfont fa-twitter fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"></path></svg></span>
+                            </a><a href="https://plus.google.com/u/0/+Mobirise" target="_blank" class="icon-wrap">
+                                <span class="amp-iconfont-social amp-iconfont fa-google-plus fa"><svg width="100%" height="100%" viewBox="0 0 2304 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1437 913q0 208-87 370.5t-248 254-369 91.5q-149 0-285-58t-234-156-156-234-58-285 58-285 156-234 234-156 285-58q286 0 491 192l-199 191q-117-113-292-113-123 0-227.5 62t-165.5 168.5-61 232.5 61 232.5 165.5 168.5 227.5 62q83 0 152.5-23t114.5-57.5 78.5-78.5 49-83 21.5-74h-416v-252h692q12 63 12 122zm867-122v210h-209v209h-210v-209h-209v-210h209v-209h210v209h209z"></path></svg></span>
+                            </a><a href="https://instagram.com/mobirise" target="_blank" class="icon-wrap">
+                                <span class="amp-iconfont-social amp-iconfont fa-instagram fa"><svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1152 896q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm138 0q0 164-115 279t-279 115-279-115-115-279 115-279 279-115 279 115 115 279zm108-410q0 38-27 65t-65 27-65-27-27-65 27-65 65-27 65 27 27 65zm-502-220q-7 0-76.5-.5t-105.5 0-96.5 3-103 10-71.5 18.5q-50 20-88 58t-58 88q-11 29-18.5 71.5t-10 103-3 96.5 0 105.5.5 76.5-.5 76.5 0 105.5 3 96.5 10 103 18.5 71.5q20 50 58 88t88 58q29 11 71.5 18.5t103 10 96.5 3 105.5 0 76.5-.5 76.5.5 105.5 0 96.5-3 103-10 71.5-18.5q50-20 88-58t58-88q11-29 18.5-71.5t10-103 3-96.5 0-105.5-.5-76.5.5-76.5 0-105.5-3-96.5-10-103-18.5-71.5q-20-50-58-88t-88-58q-29-11-71.5-18.5t-103-10-96.5-3-105.5 0-76.5.5zm768 630q0 229-5 317-10 208-124 322t-322 124q-88 5-317 5t-317-5q-208-10-322-124t-124-322q-5-88-5-317t5-317q10-208 124-322t322-124q88-5 317-5t317 5q208 10 322 124t124 322q5 88 5 317z"></path></svg></span>
+                            </a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+  
+  
+</body>
+</html>
