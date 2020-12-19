@@ -1,1 +1,0 @@
-<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="box_count" data-action="like" data-size="large" data-share="true"></div>
