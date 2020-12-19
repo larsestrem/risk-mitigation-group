@@ -1,0 +1,4 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=113028205451796&autoLogAppEvents=1" nonce="CB5G5fBC"></script>
+
+<div class="fb-post" data-href="https://www.facebook.com/firedirectory/posts/10158965138819490" data-width="auto" data-show-text="true"><blockquote cite="https://www.facebook.com/firedirectory/posts/10158965138819490" class="fb-xfbml-parse-ignore"><p>Is your fire department up to date (Check http://firedepartment.net/directory)?  It&#039;s FREE to make updates, add photos,...</p>Posted by <a href="https://www.facebook.com/firedirectory/">Fire Department Directory</a> on&nbsp;<a href="https://www.facebook.com/firedirectory/posts/10158965138819490">Saturday, December 19, 2020</a></blockquote></div>
