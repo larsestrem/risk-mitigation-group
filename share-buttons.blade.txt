@@ -1,0 +1,1 @@
+<a href='https://www.facebook.com/sharer/sharer.php?u=<page-URL>' target="_blank"><img src="https://risk-mitigation.group/fb-share.png" alt="Facebook Share Button" /></a>
