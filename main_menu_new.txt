@@ -1,0 +1,80 @@
+<div class="navbar mobile">
+            <div style="display:inline-block;position:relative;float:right;color:white;padding:10px">Logout</div>
+            <div class="dropdown">
+               <button class="dropbtn">&#9776; FireDepartment.net</button>
+               <div class="dropdown-content">
+                  <a href="/">Home</a>
+                  <a href="/directory/">Directory</a>
+                  <a href="/photos">Photos</a>
+                  <a href="/logos">Logos</a>
+                  <a href="/search">Search Fire Station By Name</a>
+                  <a href="https://fireinsurance.report/nearest-fire-station-ad-supported">Nearest Fire Station by address</a>
+                  <a href="/">Fire Dept: Make Edits</a>
+                  <!-- <a href="/">Community: Suggest an Edit</a>   -->
+                  <a href="https://www.facebook.com/pages/Fire-Department-Directory/173289579489">Follow us on Facebook</a>
+                  <a href="https://twitter.com/FireDirectory">Follow us on Twitter</a>
+                  <a href="/about">About Us</a>
+                  <!--<a href="/make-a-donation">Donate</a> -->
+                  <a class="navbar" href="/auth/login">Login</a>
+               </div>
+            </div>
+         </div>
+         <div class="navbar desktop">
+                <div style="display:inline-block;position:relative;float:right;color:white;padding:10px 15px">Logout</div>
+            <div class="dropdown">
+               <button class="dropbtn">
+               FireDepartment.net &#9662;</button>
+               <div class="dropdown-content">
+                    <a href="/">Home</a>
+                    <a href="/direcory/">Directory</a>
+                    <a href="/become-a-volunteer-firefighter">Volunteer</a>
+                    <a href="/contact-us">Contact us</a>
+                    <a href="/about">About us</a>
+                    <a href="/make-a-donation">Donate</a>
+               </div>
+            </div>
+            <div class="dropdown">
+               <button class="dropbtn">Search &#9662;</button>
+               <div class="dropdown-content">
+                    <a href="/directory">By State, County &amp; City</a>
+                    <a href="/search">By Name</a>
+                    <a href="https://fireinsurance.report/nearest-fire-station-ad-supported">Nearest Fire Stations by address</a>
+               </div>
+            </div>
+            <div class="dropdown">
+                    <button class="dropbtn">Photos &#9662;</button>
+                    <div class="dropdown-content">
+                         <a href="/logos">Logos</a>
+                         <a href="/photos/departments">Station Photos</a>
+                         <a href="/photos/firefighters">Firefighter Photos</a>
+                         <a href="/photos/fire-equipment">Apparatus Photos</a>
+                    </div>
+                 </div>
+                 <div class="dropdown">
+                        <button class="dropbtn">Tools &#9662;</button>
+                        <div class="dropdown-content">
+                             <a href="https://www.frictionlosscalculator.com/">Friction Loss Calculator</a>
+                             <a href="https://www.frictionlosscalculator.com/compact-table">Friction Loss Cheat Sheet</a>
+                             <a href="http://fireengineacademy.com/fire-engine-pump-and-plumbing/">Pump &amp; Plumbing Diagram</a>
+                             <a href="http://fireengineacademy.com/pump-discharge-pressure/">How to Calculate pump pressure</a>
+                        </div>
+                     </div>
+            <div class="dropdown">
+               <button class="dropbtn">Social &#9662;</button>
+               <div class="dropdown-content">
+                  <a href="https://www.facebook.com/pages/Fire-Department-Directory/173289579489" target="_blank">Facebook</span></a>
+                  <!-- <a href="https://www.facebook.com/" target="_blank">Facebook - Follow</span></a> -->
+                  <!--<a href="https://www.linkedin.com/groups/" target="_blank">Linkedin</span></a> -->
+                  <a href="https://twitter.com/FireDirectory">Twitter</a>
+                  <a href="https://www.pinterest.com/firedepartments/">Pinterest</a>
+               </div>
+            </div>
+            <div class="dropdown">
+               <button class="dropbtn">Add or Edit &#9662;</button>
+               <div class="dropdown-content">
+                  <!-- <a href="https://instructions.firedepartment.net/add-a-fire-dept">Add a Fire Dept.</a> -->
+                  <a href="https://www.firedepartment.net/edit-fire-department-info">Add or Edit a Fire Dept.</a>
+                  <!-- <a href="https://instructions.firedepartment.net/community-edit">Edit a Fire Dept.<br />(from community)</a> -->
+               </div>
+            </div>
+         </div>
